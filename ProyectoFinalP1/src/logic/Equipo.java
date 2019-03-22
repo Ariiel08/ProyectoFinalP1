@@ -12,6 +12,18 @@ public class Equipo {
 	private int JugPerdidos;
 	private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 	
+	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos,
+			ArrayList<Jugador> jugadores) {
+		super();
+		Nombre = nombre;
+		Provincia = provincia;
+		Estadio = estadio;
+		Campeonatos = campeonatos;
+		JugGanados = jugGanados;
+		JugPerdidos = jugPerdidos;
+		jugadores = new ArrayList<>();
+	}
+	
 	public String getNombre() {
 		return Nombre;
 	}
@@ -55,5 +67,8 @@ public class Equipo {
 		this.jugadores = jugadores;
 	}
 	
+	public void InsertarJugador(Jugador aux) {
+		jugadores.add(aux);
+	}
 	
 }
