@@ -26,6 +26,86 @@ public class Partido {
 		HitsLoc = hitsLoc;
 		Fecha = fecha;
 	}
+
+	public Equipo getVisitante() {
+		return Visitante;
+	}
+
+	public void setVisitante(Equipo visitante) {
+		Visitante = visitante;
+	}
+
+	public Equipo getLocal() {
+		return Local;
+	}
+
+	public void setLocal(Equipo local) {
+		Local = local;
+	}
+
+	public String getEstadio() {
+		return Estadio;
+	}
+
+	public void setEstadio(String estadio) {
+		Estadio = estadio;
+	}
+
+	public int getCarrVis() {
+		return CarrVis;
+	}
+
+	public void setCarrVis(int carrVis) {
+		CarrVis = carrVis;
+	}
+
+	public int getCarrLoc() {
+		return CarrLoc;
+	}
+
+	public void setCarrLoc(int carrLoc) {
+		CarrLoc = carrLoc;
+	}
+
+	public int getErrorVis() {
+		return ErrorVis;
+	}
+
+	public void setErrorVis(int errorVis) {
+		ErrorVis = errorVis;
+	}
+
+	public int getErrorLoc() {
+		return ErrorLoc;
+	}
+
+	public void setErrorLoc(int errorLoc) {
+		ErrorLoc = errorLoc;
+	}
+
+	public int getHitsVis() {
+		return HitsVis;
+	}
+
+	public void setHitsVis(int hitsVis) {
+		HitsVis = hitsVis;
+	}
+
+	public int getHitsLoc() {
+		return HitsLoc;
+	}
+
+	public void setHitsLoc(int hitsLoc) {
+		HitsLoc = hitsLoc;
+	}
+
+	public Date getFecha() {
+		return Fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		Fecha = fecha;
+	}
 	
 	
 }
