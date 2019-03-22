@@ -21,7 +21,7 @@ public class Estadistica {
 		JuegosJug = juegosJug;
 		AVG = aVG;
 	}
-
+ 
 	public int getAB() {
 		return AB;
 	}
