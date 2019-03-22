@@ -11,6 +11,7 @@ public class Equipo {
 	private int JugGanados;
 	private int JugPerdidos;
 	private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+	
 	public String getNombre() {
 		return Nombre;
 	}
