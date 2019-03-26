@@ -30,7 +30,7 @@ public class RegJugador extends JDialog {
 	public RegJugador() {
 		
 		setTitle("Registrar jugador");
-		setBounds(100, 100, 621, 362);
+		setBounds(100, 100, 621, 239);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
