@@ -15,6 +15,7 @@ public abstract class Jugador {
 	
 	public Jugador(String nombre, Date fechaNacimiento, String lanzamiento, String bateo, String paisOrigen,
 			String posicion, ArrayList<Lesion> lesiones) {
+		
 		super();
 		Nombre = nombre;
 		FechaNacimiento = fechaNacimiento;
