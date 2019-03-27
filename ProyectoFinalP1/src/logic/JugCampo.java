@@ -21,6 +21,9 @@ public class JugCampo extends Jugador {
 	public void setEstad(Estadistica estad) {
 		this.estad = estad;
 	}
-
+	
+	public void InsertarLesion(Lesion aux) {
+		MisLesiones.add(aux);
+	}
 	
 }

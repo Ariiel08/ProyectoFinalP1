@@ -1,9 +1,10 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Jugador {
+public abstract class Jugador implements Serializable{
 
 	protected String Nombre;
 	protected Date FechaNacimiento;
@@ -11,11 +12,10 @@ public abstract class Jugador {
 	protected String Bateo;
 	protected String PaisOrigen;
 	protected String Posicion;
-	protected ArrayList<Lesion> lesiones = new ArrayList<Lesion>();
+	protected ArrayList<Lesion> MisLesiones;
 	
 	public Jugador(String nombre, Date fechaNacimiento, String lanzamiento, String bateo, String paisOrigen,
 			String posicion, ArrayList<Lesion> lesiones) {
-		
 		super();
 		Nombre = nombre;
 		FechaNacimiento = fechaNacimiento;
@@ -23,7 +23,7 @@ public abstract class Jugador {
 		Bateo = bateo;
 		PaisOrigen = paisOrigen;
 		Posicion = posicion;
-		this.lesiones = lesiones;
+		MisLesiones = new ArrayList<>();
 	}
 	
 	

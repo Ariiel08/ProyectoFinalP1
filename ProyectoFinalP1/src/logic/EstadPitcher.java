@@ -1,5 +1,3 @@
-package logic;
-
 public class EstadPitcher {
 	
 	private int JuegosIni;
@@ -10,9 +8,10 @@ public class EstadPitcher {
 	private int Ponches;
 	private int Vict, Der;
 	private float PromCL;
+	private int EntradasJugadas;
 	
 	public EstadPitcher(int juegosIni, int hitsPitch, int carrPitch, int carrLimpias, int jonronPitch, int bBPitch,
-			int ponches, int vict, int der, float promCL) {
+			int ponches, int vict, int der, float promCL, int EntradasJugadas) {
 		super();
 		JuegosIni = juegosIni;
 		HitsPitch = hitsPitch;
@@ -106,5 +105,9 @@ public class EstadPitcher {
 		PromCL = promCL;
 	}
 	
-	
+	public void PromCL() {
+		float aux = 0;
+		aux = (CarrLimpias * 9) / EntradasJugadas;
+		setPromCL(aux);
+	}
 }

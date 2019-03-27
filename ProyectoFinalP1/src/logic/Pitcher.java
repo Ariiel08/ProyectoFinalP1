@@ -22,5 +22,8 @@ public class Pitcher extends Jugador {
 		this.estad = estad;
 	}
 
+	public void InsertarLesion(Lesion aux) {
+		MisLesiones.add(aux);
+	}
 	
 }

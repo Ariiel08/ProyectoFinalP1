@@ -1,18 +1,21 @@
+
 package logic;
 
 import java.util.ArrayList;
 
 public class Equipo {
 	
+
 	private String Nombre;
 	private String Provincia;
 	private String Estadio;
 	private int Campeonatos;
 	private int JugGanados;
 	private int JugPerdidos;
-	private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+	private int JugJugados;
+	private ArrayList<Jugador> jugadores;
 	
-	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos,
+	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos, int JugJugados,
 			ArrayList<Jugador> jugadores) {
 		super();
 		Nombre = nombre;
@@ -21,8 +24,10 @@ public class Equipo {
 		Campeonatos = campeonatos;
 		JugGanados = jugGanados;
 		JugPerdidos = jugPerdidos;
+		JugJugados = JugJugados;
 		jugadores = new ArrayList<>();
 	}
+	
 	
 	public String getNombre() {
 		return Nombre;
@@ -70,5 +75,24 @@ public class Equipo {
 	public void InsertarJugador(Jugador aux) {
 		jugadores.add(aux);
 	}
+
+
+	public int getJugJugados() {
+		return JugJugados;
+	}
+
+
+	public void setJugJugados(int jugJugados) {
+		JugJugados = jugJugados;
+	}
 	
+	public void Victoria() {
+		JugJugados++;
+		JugGanados++;
+	}
+	
+	public void Derrota() {
+		JugJugados++;
+		JugPerdidos++;
+	}
 }

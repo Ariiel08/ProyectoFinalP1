@@ -21,7 +21,7 @@ public class Estadistica {
 		JuegosJug = juegosJug;
 		AVG = aVG;
 	}
- 
+
 	public int getAB() {
 		return AB;
 	}
@@ -118,5 +118,11 @@ public class Estadistica {
 		AVG = aVG;
 	}
 	
+	public void AVG() {
+		float aux = 0;
+		aux = H /AB;
+		setAVG(aux);
+	}
 	
 }
+
