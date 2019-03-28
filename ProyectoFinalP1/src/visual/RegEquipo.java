@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class RegEquipo extends JDialog {
 
@@ -47,29 +48,32 @@ public class RegEquipo extends JDialog {
 			panel.setLayout(null);
 			
 			JLabel lblNombre = new JLabel("Nombre");
+			lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblNombre.setBounds(12, 32, 46, 14);
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(57, 28, 140, 20);
+			txtNombre.setBounds(68, 29, 140, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
 			JLabel lblProvincia = new JLabel("Provincia");
-			lblProvincia.setBounds(235, 32, 46, 14);
+			lblProvincia.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblProvincia.setBounds(235, 32, 62, 14);
 			panel.add(lblProvincia);
 			
 			txtProvincia = new JTextField();
-			txtProvincia.setBounds(291, 29, 140, 20);
+			txtProvincia.setBounds(307, 29, 140, 20);
 			panel.add(txtProvincia);
 			txtProvincia.setColumns(10);
 			
 			JLabel lblEstadio = new JLabel("Estadio");
+			lblEstadio.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblEstadio.setBounds(12, 78, 46, 14);
 			panel.add(lblEstadio);
 			
 			txtEstadio = new JTextField();
-			txtEstadio.setBounds(57, 76, 140, 20);
+			txtEstadio.setBounds(68, 75, 140, 20);
 			panel.add(txtEstadio);
 			txtEstadio.setColumns(10);
 		}

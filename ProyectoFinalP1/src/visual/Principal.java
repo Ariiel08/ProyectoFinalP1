@@ -61,6 +61,13 @@ public class Principal extends JFrame {
 		mnNuevo.add(mntmJugador);
 		
 		JMenuItem mntmEquipo = new JMenuItem("Equipo");
+		mntmEquipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegEquipo regE = new RegEquipo();
+				regE.setModal(true);
+				regE.setVisible(true);
+			}
+		});
 		mntmEquipo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		mnNuevo.add(mntmEquipo);
 		
