@@ -7,10 +7,10 @@ public class Pitcher extends Jugador {
 	
 	private EstadPitcher estad;
 
-	public Pitcher(String nombre, Date fechaNacimiento, String lanzamiento, String bateo, String paisOrigen,
-			String posicion, ArrayList<Lesion> lesiones) {
+	public Pitcher(String nombre, Date fechaNacimiento, int peso, int altura, String lanzamiento, String bateo, String paisOrigen,
+			String posicion, String equipo, ArrayList<Lesion> lesiones) {
 		
-		super(nombre, fechaNacimiento, lanzamiento, bateo, paisOrigen, posicion, lesiones);
+		super(nombre, fechaNacimiento, peso, altura, lanzamiento, bateo, paisOrigen, posicion, equipo, lesiones);
 		
 	}
 

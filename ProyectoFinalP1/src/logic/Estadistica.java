@@ -2,15 +2,16 @@ package logic;
 
 public class Estadistica {
 	
-	private int AB,D,H,Dobles,Triples,BB,Ponches,Errores,PuestosOut,DobleMatanzas,JuegosJug;
+	private int AB,D,H,HR,Dobles,Triples,BB,Ponches,Errores,PuestosOut,DobleMatanzas,JuegosJug;
 	private float AVG;
 	
-	public Estadistica(int aB, int d, int h, int dobles, int triples, int bB, int ponches, int errores, int puestosOut,
+	public Estadistica(int aB, int d, int h,  int hr, int dobles, int triples, int bB, int ponches, int errores, int puestosOut,
 			int dobleMatanzas, int juegosJug, float aVG) {
 		super();
 		AB = aB;
 		D = d;
 		H = h;
+		HR = hr;
 		Dobles = dobles;
 		Triples = triples;
 		BB = bB;
@@ -118,6 +119,14 @@ public class Estadistica {
 		AVG = aVG;
 	}
 	
+	public int getHR() {
+		return HR;
+	}
+
+	public void setHR(int hR) {
+		HR = hR;
+	}
+
 	public void AVG() {
 		float aux = 0;
 		aux = H /AB;
