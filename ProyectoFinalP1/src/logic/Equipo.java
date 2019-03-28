@@ -13,10 +13,9 @@ public class Equipo {
 	private int JugGanados;
 	private int JugPerdidos;
 	private int JugJugados;
-	private ArrayList<Jugador> jugadores;
+	private ArrayList<Jugador> jugadores = new ArrayList<>();
 	
-	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos, int JugJugados,
-			ArrayList<Jugador> jugadores) {
+	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos, int JugJugados) {
 		super();
 		Nombre = nombre;
 		Provincia = provincia;
@@ -25,7 +24,6 @@ public class Equipo {
 		JugGanados = jugGanados;
 		JugPerdidos = jugPerdidos;
 		JugJugados = JugJugados;
-		jugadores = new ArrayList<>();
 	}
 	
 	
