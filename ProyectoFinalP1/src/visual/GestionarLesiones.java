@@ -180,8 +180,20 @@ public class GestionarLesiones extends JDialog {
 				else{
 					fila[2] = "Lesionado";
 				}
-				fila[3] = Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(i).getMiLesion().getTipoLesion();
-				fila[4] = Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(i).getMiLesion().getDiasRec();
+				if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(i).getMiLesion() == null) {
+					fila[3] = "Ninguna";
+				}
+				else {
+					fila[3] = Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(i).getMiLesion().getTipoLesion();
+
+				}
+				if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(i).getMiLesion() == null ) {
+					fila[4] = "Activo";
+				}
+				else {
+					fila[4] = Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(i).getMiLesion().getDiasRec();
+
+				}
 				
 				Renderer edit = new Renderer();
 				table.setDefaultRenderer(Object.class, edit);
