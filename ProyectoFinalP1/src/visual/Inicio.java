@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import logic.Administracion;
 
 import java.awt.Color;
+import java.awt.Dialog.ModalExclusionType;
+
 import javax.swing.JButton;
 import rsbuttom.RSButtonMetro;
 import javax.swing.ImageIcon;
@@ -37,6 +39,9 @@ public class Inicio extends JFrame {
 				try {
 					Inicio frame = new Inicio();
 					frame.setVisible(true);
+					Login log = new Login();
+					log.setModal(true);
+					log.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,6 +49,7 @@ public class Inicio extends JFrame {
 		});
 	}
 	public Inicio() {
+		
 		setTitle("Gesti\u00F3n de estad\u00EDsticas de b\u00E9isbol");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 834, 467);
@@ -95,23 +101,23 @@ public class Inicio extends JFrame {
 		panel_izq.setLayout(null);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel_superior, GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_izq, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addGap(637))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_superior, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_izq, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+					.addComponent(panel_izq, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
 		);
 		
 		panel_Nuevo = new JPanel();
 		panel_Nuevo.setBackground(SystemColor.menu);
-		panel_Nuevo.setBounds(0, 0, 170, 147);
+		panel_Nuevo.setBounds(0, 0, 170, 210);
 		panel_izq.add(panel_Nuevo);
 		panel_Nuevo.setLayout(null);
 		
@@ -188,7 +194,7 @@ public class Inicio extends JFrame {
 		lblNuevo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		panel_Gestion = new JPanel();
-		panel_Gestion.setBounds(0, 0, 170, 147);
+		panel_Gestion.setBounds(0, 0, 170, 210);
 		panel_izq.add(panel_Gestion);
 		panel_Gestion.setLayout(null);
 		panel_Gestion.setVisible(false);
@@ -264,6 +270,24 @@ public class Inicio extends JFrame {
 		lblGestin.setForeground(Color.GRAY);
 		lblGestin.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
+		RSButtonMetro btnmtrLesiones = new RSButtonMetro();
+		btnmtrLesiones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GestionarLesiones gesl = new GestionarLesiones();
+				gesl.setModal(true);
+				gesl.setVisible(true);
+			}
+		});
+		btnmtrLesiones.setText("Lesiones");
+		btnmtrLesiones.setForeground(Color.GRAY);
+		btnmtrLesiones.setColorTextNormal(Color.GRAY);
+		btnmtrLesiones.setColorPressed(Color.DARK_GRAY);
+		btnmtrLesiones.setColorNormal(SystemColor.menu);
+		btnmtrLesiones.setColorHover(Color.GRAY);
+		btnmtrLesiones.setBackground(SystemColor.menu);
+		btnmtrLesiones.setBounds(0, 138, 170, 35);
+		panel_Gestion.add(btnmtrLesiones);
+		
 		RSButtonMetro btnTest = new RSButtonMetro();
 		btnTest.setToolTipText("Gestionar");
 		btnTest.addActionListener(new ActionListener() {
@@ -304,5 +328,6 @@ public class Inicio extends JFrame {
 					.addGap(2))
 		);
 		contentPane.setLayout(gl_contentPane);
+		
 	}
 }
