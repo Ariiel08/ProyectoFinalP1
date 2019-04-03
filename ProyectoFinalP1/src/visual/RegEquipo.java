@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.border.BevelBorder;
 
 public class RegEquipo extends JDialog {
 
@@ -27,16 +28,13 @@ public class RegEquipo extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtProvincia;
 	private JTextField txtEstadio;
+	private JTextField txtManager;
 
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the dialog.
-	 */
 	public RegEquipo() {
+		setResizable(false);
 		setTitle("Registrar Equipo");
-		setBounds(100, 100, 531, 206);
+		setBounds(100, 100, 483, 206);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -47,7 +45,7 @@ public class RegEquipo extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JLabel lblNombre = new JLabel("Nombre");
+			JLabel lblNombre = new JLabel("Nombre:");
 			lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblNombre.setBounds(12, 32, 46, 14);
 			panel.add(lblNombre);
@@ -57,7 +55,7 @@ public class RegEquipo extends JDialog {
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
-			JLabel lblProvincia = new JLabel("Provincia");
+			JLabel lblProvincia = new JLabel("Provincia:");
 			lblProvincia.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblProvincia.setBounds(235, 32, 62, 14);
 			panel.add(lblProvincia);
@@ -67,7 +65,7 @@ public class RegEquipo extends JDialog {
 			panel.add(txtProvincia);
 			txtProvincia.setColumns(10);
 			
-			JLabel lblEstadio = new JLabel("Estadio");
+			JLabel lblEstadio = new JLabel("Estadio:");
 			lblEstadio.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblEstadio.setBounds(12, 78, 46, 14);
 			panel.add(lblEstadio);
@@ -76,20 +74,33 @@ public class RegEquipo extends JDialog {
 			txtEstadio.setBounds(68, 75, 140, 20);
 			panel.add(txtEstadio);
 			txtEstadio.setColumns(10);
+			
+			JLabel lblManager = new JLabel("Manager:");
+			lblManager.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblManager.setBounds(235, 78, 46, 14);
+			panel.add(lblManager);
+			
+			txtManager = new JTextField();
+			txtManager.setBounds(307, 75, 140, 20);
+			panel.add(txtManager);
+			txtManager.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Aceptar");
+				okButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String nombre = txtNombre.getText();
 						String estadio = txtEstadio.getText();
 						String provincia = txtProvincia.getText();
+						String manager = txtManager.getText();
 						if(!nombre.equalsIgnoreCase("") && !estadio.equalsIgnoreCase("") && !provincia.equalsIgnoreCase("")) {
-							Equipo aux = new Equipo(nombre, provincia, estadio, 0, 0, 0, 0);
+							Equipo aux = new Equipo(nombre, provincia, estadio, 0, 0, 0, 0, manager);
 							Administracion.getInstancia().insertarEquipo(aux);
 							dispose();
 						}
@@ -104,6 +115,7 @@ public class RegEquipo extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

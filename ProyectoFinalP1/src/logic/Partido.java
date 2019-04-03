@@ -1,19 +1,22 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Partido {
+public class Partido implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Equipo Visitante;
 	private Equipo Local;
 	private String Estadio;
 	private int CarrVis, CarrLoc;
 	private int ErrorVis, ErrorLoc;
 	private int HitsVis, HitsLoc;
+	private String Hora;
 	private Date Fecha;
 	
 	public Partido(Equipo visitante, Equipo local, String estadio, int carrVis, int carrLoc, int errorVis, int errorLoc,
-			int hitsVis, int hitsLoc, Date fecha) {
+			int hitsVis, int hitsLoc, String hora, Date fecha) {
 		super();
 		Visitante = visitante;
 		Local = local;
@@ -24,6 +27,7 @@ public class Partido {
 		ErrorLoc = errorLoc;
 		HitsVis = hitsVis;
 		HitsLoc = hitsLoc;
+		Hora = hora;
 		Fecha = fecha;
 	}
 
@@ -98,6 +102,14 @@ public class Partido {
 	public void setHitsLoc(int hitsLoc) {
 		HitsLoc = hitsLoc;
 	}
+	
+	public String getHora() {
+		return Hora;
+	}
+
+	public void setHora(String hora) {
+		Hora = hora;
+	}
 
 	public Date getFecha() {
 		return Fecha;
@@ -106,7 +118,5 @@ public class Partido {
 	public void setFecha(Date fecha) {
 		Fecha = fecha;
 	}
-	
-	
 	
 }

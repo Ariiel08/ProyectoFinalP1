@@ -1,9 +1,11 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Administracion {
+public class Administracion implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Equipo> MisEquipos;
 	private ArrayList<Partido> MisPartidos;
 	private static Administracion MiAdmin = null;
@@ -43,5 +45,16 @@ public class Administracion {
 	
 	public void insertarPartido(Partido aux) {
 		MisPartidos.add(aux);
+	}
+	
+	public Equipo buscarEquipo(String nom) {
+		
+		for (Equipo i : MisEquipos) {
+			if(i.getNombre() == nom) {
+				return i;
+			}
+		}
+		
+		return null;
 	}
 }

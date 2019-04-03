@@ -1,21 +1,23 @@
 
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Equipo {
+public class Equipo implements Serializable{
 	
-
+	private static final long serialVersionUID = 1L;
 	private String Nombre;
 	private String Provincia;
 	private String Estadio;
+	private String Manager;
 	private int Campeonatos;
 	private int JugGanados;
 	private int JugPerdidos;
 	private int JugJugados;
 	private ArrayList<Jugador> jugadores = new ArrayList<>();
 	
-	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos, int JugJugados) {
+	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos, int Jugjugados, String manager) {
 		super();
 		Nombre = nombre;
 		Provincia = provincia;
@@ -23,7 +25,8 @@ public class Equipo {
 		Campeonatos = campeonatos;
 		JugGanados = jugGanados;
 		JugPerdidos = jugPerdidos;
-		JugJugados = JugJugados;
+		JugJugados = Jugjugados;
+		Manager = manager;
 	}
 	
 	
@@ -92,5 +95,15 @@ public class Equipo {
 	public void Derrota() {
 		JugJugados++;
 		JugPerdidos++;
+	}
+
+
+	public String getManager() {
+		return Manager;
+	}
+
+
+	public void setManager(String manager) {
+		Manager = manager;
 	}
 }

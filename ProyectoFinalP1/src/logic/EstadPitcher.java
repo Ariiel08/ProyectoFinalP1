@@ -1,7 +1,10 @@
 package logic;
 
-public class EstadPitcher {
+import java.io.Serializable;
+
+public class EstadPitcher implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private int JuegosIni;
 	private int HitsPitch;
 	private int CarrPitch, CarrLimpias;

@@ -6,6 +6,7 @@ import java.util.Date;
 
 public abstract class Jugador implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	protected String Nombre;
 	protected Date FechaNacimiento;
 	protected int Peso;
@@ -16,9 +17,10 @@ public abstract class Jugador implements Serializable{
 	protected String Posicion;
 	protected String Equipo;
 	protected ArrayList<Lesion> MisLesiones;
+	protected int Edad;
 	
 	public Jugador(String nombre, Date fechaNacimiento, int peso, int altura, String lanzamiento, String bateo, String paisOrigen,
-			String posicion, String equipo, ArrayList<Lesion> lesiones) {
+			String posicion, String equipo, ArrayList<Lesion> lesiones, int edad) {
 		super();
 		Nombre = nombre;
 		FechaNacimiento = fechaNacimiento;
@@ -30,6 +32,7 @@ public abstract class Jugador implements Serializable{
 		Posicion = posicion;
 		Equipo = equipo;
 		MisLesiones = new ArrayList<>();
+		Edad = edad;
 	}
 
 	public String getNombre() {
@@ -110,6 +113,14 @@ public abstract class Jugador implements Serializable{
 
 	public void setMisLesiones(ArrayList<Lesion> misLesiones) {
 		MisLesiones = misLesiones;
+	}
+
+	public int getEdad() {
+		return Edad;
+	}
+
+	public void setEdad(int edad) {
+		Edad = edad;
 	}
 	
 	

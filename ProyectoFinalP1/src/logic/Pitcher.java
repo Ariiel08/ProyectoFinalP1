@@ -5,12 +5,13 @@ import java.util.Date;
 
 public class Pitcher extends Jugador {
 	
+	private static final long serialVersionUID = 1L;
 	private EstadPitcher estad;
 
 	public Pitcher(String nombre, Date fechaNacimiento, int peso, int altura, String lanzamiento, String bateo, String paisOrigen,
-			String posicion, String equipo, ArrayList<Lesion> lesiones) {
+			String posicion, String equipo, ArrayList<Lesion> lesiones, int edad) {
 		
-		super(nombre, fechaNacimiento, peso, altura, lanzamiento, bateo, paisOrigen, posicion, equipo, lesiones);
+		super(nombre, fechaNacimiento, peso, altura, lanzamiento, bateo, paisOrigen, posicion, equipo, lesiones, edad);
 		
 	}
 
