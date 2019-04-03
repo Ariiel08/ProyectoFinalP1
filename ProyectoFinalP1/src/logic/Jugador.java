@@ -16,8 +16,10 @@ public abstract class Jugador implements Serializable{
 	protected String PaisOrigen;
 	protected String Posicion;
 	protected String Equipo;
-	protected ArrayList<Lesion> MisLesiones;
+	protected ArrayList<Lesion> HistorialLesiones;
+	protected Lesion MiLesion;
 	protected int Edad;
+	protected boolean Estado = true;
 	
 	public Jugador(String nombre, Date fechaNacimiento, int peso, int altura, String lanzamiento, String bateo, String paisOrigen,
 			String posicion, String equipo, ArrayList<Lesion> lesiones, int edad) {
@@ -31,7 +33,7 @@ public abstract class Jugador implements Serializable{
 		PaisOrigen = paisOrigen;
 		Posicion = posicion;
 		Equipo = equipo;
-		MisLesiones = new ArrayList<>();
+		HistorialLesiones = new ArrayList<>();
 		Edad = edad;
 	}
 
@@ -108,11 +110,11 @@ public abstract class Jugador implements Serializable{
 	}
 
 	public ArrayList<Lesion> getMisLesiones() {
-		return MisLesiones;
+		return HistorialLesiones;
 	}
 
 	public void setMisLesiones(ArrayList<Lesion> misLesiones) {
-		MisLesiones = misLesiones;
+		HistorialLesiones = misLesiones;
 	}
 
 	public int getEdad() {
@@ -122,6 +124,25 @@ public abstract class Jugador implements Serializable{
 	public void setEdad(int edad) {
 		Edad = edad;
 	}
+
+	public boolean isEstado() {
+		return Estado;
+	}
+
+	public void setEstado(boolean estado) {
+		Estado = estado;
+	}
+
+	public Lesion getMiLesion() {
+		return MiLesion;
+	}
+
+	public void setMiLesion(Lesion miLesion) {
+		MiLesion = miLesion;
+	}
 	
+	public void AddLesion(Lesion les) {
+		HistorialLesiones.add(les);
+	}
 	
 }

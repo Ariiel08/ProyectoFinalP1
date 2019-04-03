@@ -61,7 +61,7 @@ public class ListJugadores extends JDialog {
 			scrollPane.setBounds(10, 50, 583, 261);
 			panel.add(scrollPane);
 			
-			String[] header = {"Nombre", "Posicion", "Pais de Origen", "Altura"};
+			String[] header = {"Nombre", "Posición", "Pais de Origen", "Altura"};
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(header);
 			table = new JTable();

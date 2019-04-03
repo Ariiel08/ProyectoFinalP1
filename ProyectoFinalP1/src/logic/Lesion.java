@@ -7,12 +7,16 @@ public class Lesion {
 	private String TipoLesion;
 	private Date FechaLesion;
 	private int DiasRec;
+	private String AtendNombre;
+	private String Descripcion;
 	
-	public Lesion(String tipoLesion, Date fechaLesion, int diasRec) {
+	public Lesion(String tipoLesion, Date fechaLesion, int diasRec, String nombre, String descripcion) {
 		super();
 		TipoLesion = tipoLesion;
 		FechaLesion = fechaLesion;
 		DiasRec = diasRec;
+		AtendNombre = nombre;
+		Descripcion = descripcion;
 	}
 
 	public String getTipoLesion() {
@@ -37,6 +41,22 @@ public class Lesion {
 
 	public void setDiasRec(int diasRec) {
 		DiasRec = diasRec;
+	}
+
+	public String getAtendNombre() {
+		return AtendNombre;
+	}
+
+	public void setAtendNombre(String atendNombre) {
+		AtendNombre = atendNombre;
+	}
+
+	public String getDescripcion() {
+		return Descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		Descripcion = descripcion;
 	}
 	
 	

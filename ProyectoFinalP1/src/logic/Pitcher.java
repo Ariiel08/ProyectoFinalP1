@@ -24,7 +24,7 @@ public class Pitcher extends Jugador {
 	}
 
 	public void InsertarLesion(Lesion aux) {
-		MisLesiones.add(aux);
+		HistorialLesiones.add(aux);
 	}
 	
 }

@@ -16,6 +16,7 @@ public class Equipo implements Serializable{
 	private int JugPerdidos;
 	private int JugJugados;
 	private ArrayList<Jugador> jugadores = new ArrayList<>();
+	private int CantLesiones;
 	
 	public Equipo(String nombre, String provincia, String estadio, int campeonatos, int jugGanados, int jugPerdidos, int Jugjugados, String manager) {
 		super();
@@ -105,5 +106,15 @@ public class Equipo implements Serializable{
 
 	public void setManager(String manager) {
 		Manager = manager;
+	}
+
+
+	public int getCantLesiones() {
+		return CantLesiones;
+	}
+
+
+	public void setCantLesiones(int cantLesiones) {
+		CantLesiones = cantLesiones;
 	}
 }
