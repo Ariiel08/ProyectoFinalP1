@@ -55,6 +55,7 @@ public class ListPartidos extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						btnEliminar.setEnabled(true);
+						
 						index = table.getSelectedRow();
 					}
 				});
@@ -76,18 +77,40 @@ public class ListPartidos extends JDialog {
 						if(Administracion.getInstancia().getMisPartidos().size() != 0) {
 							int input = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar el equipo?","Confirmación",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 							
-							if(input == 0) {
+							if(input == 0 || Administracion.getInstancia().getMisPartidos().size() > 0) {
 								Administracion.getInstancia().getMisPartidos().remove(index);
 								Administracion.getInstancia().Guardar(Administracion.getInstancia());
 								JOptionPane.showMessageDialog(null, "El partido ha sido eliminado.","Información",JOptionPane.INFORMATION_MESSAGE);
 							}
-							
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "No has seleccionado un partido.","Aviso",JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				});
+				{
+					JButton btnJugarPartido = new JButton("Jugar partido");
+					btnJugarPartido.setEnabled(false);
+					btnJugarPartido.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if(Administracion.getInstancia().getMisPartidos().size() > 0) {
+								int indexLocal,indexVis;
+								
+								indexLocal = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getLocal().getNombre());
+								indexVis = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getVisitante().getNombre());
+								
+								Simulacion sim = new Simulacion();
+								sim.setModal(true);
+								sim.setVisible(true);		
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "No has seleccionado un partido.","Aviso",JOptionPane.WARNING_MESSAGE);
+							}
+						}
+					});
+					btnJugarPartido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+					buttonPane.add(btnJugarPartido);
+				}
 				btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				btnEliminar.setActionCommand("OK");
 				buttonPane.add(btnEliminar);

@@ -79,6 +79,17 @@ public class Administracion implements Serializable{
 		return -1;
 	}
 	
+	public int findJugador(int i, String nom) {
+		
+		for (int j = 0; j < MisEquipos.get(i).getJugadores().size(); j++) {
+			if(MisEquipos.get(i).getJugadores().get(j).getNombre() == nom) {
+				return j;
+			}
+		}
+		
+		return -1;
+	}
+	
 	public boolean buscarNumJug(Equipo e, int num) {
 		
 		for (Jugador i : e.getJugadores()) {
