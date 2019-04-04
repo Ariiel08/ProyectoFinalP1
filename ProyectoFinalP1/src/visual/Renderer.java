@@ -16,6 +16,9 @@ public class Renderer extends DefaultTableCellRenderer {
 		if(table.getValueAt(row, 2).equals("Lesionado")) {
 			this.setBackground(Color.RED);
 		}
+		else if(table.getValueAt(row, 2).equals("En Forma")) {
+			this.setBackground(Color.WHITE);
+		}
 		
 		return this;
 	}

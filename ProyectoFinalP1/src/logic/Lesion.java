@@ -1,9 +1,14 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lesion {
+public class Lesion implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String TipoLesion;
 	private Date FechaLesion;
 	private int DiasRec;
