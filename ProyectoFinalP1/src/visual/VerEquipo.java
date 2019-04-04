@@ -54,6 +54,7 @@ public class VerEquipo extends JDialog {
 		MiEquipo = e;
 		setTitle("Interfaz de Equipo");
 		setBounds(100, 100, 919, 504);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

@@ -18,11 +18,12 @@ public abstract class Jugador implements Serializable{
 	protected String Equipo;
 	protected ArrayList<Lesion> HistorialLesiones;
 	protected Lesion MiLesion;
+	protected int Numero;
 	protected int Edad;
 	protected boolean Estado = true;
 	
 	public Jugador(String nombre, Date fechaNacimiento, int peso, int altura, String lanzamiento, String bateo, String paisOrigen,
-			String posicion, String equipo, ArrayList<Lesion> lesiones, int edad) {
+			String posicion, String equipo, ArrayList<Lesion> lesiones, int numero, int edad) {
 		super();
 		Nombre = nombre;
 		FechaNacimiento = fechaNacimiento;
@@ -34,6 +35,7 @@ public abstract class Jugador implements Serializable{
 		Posicion = posicion;
 		Equipo = equipo;
 		HistorialLesiones = new ArrayList<>();
+		Numero = numero;
 		Edad = edad;
 	}
 
@@ -115,6 +117,14 @@ public abstract class Jugador implements Serializable{
 
 	public void setMisLesiones(ArrayList<Lesion> misLesiones) {
 		HistorialLesiones = misLesiones;
+	}
+
+	public int getNumero() {
+		return Numero;
+	}
+
+	public void setNumero(int numero) {
+		Numero = numero;
 	}
 
 	public int getEdad() {

@@ -36,10 +36,12 @@ public class RegLesion extends JDialog {
 	private JTextPane txtDescripcion;
 
 	public RegLesion(int i, int e) {
+		
 		MiJugador = i;
 		MiEquipo = e;
 		setTitle("Registrar Lesion");
 		setBounds(100, 100, 512, 255);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -50,7 +52,7 @@ public class RegLesion extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JLabel lblTipoDeLesion = new JLabel("Tipo de Lesion");
+			JLabel lblTipoDeLesion = new JLabel("Tipo de Lesion:");
 			lblTipoDeLesion.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblTipoDeLesion.setBounds(16, 30, 95, 16);
 			panel.add(lblTipoDeLesion);
@@ -89,8 +91,8 @@ public class RegLesion extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Confirmar");
-				okButton.addActionListener(new ActionListener() {
+				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String tipo = cbxTipo.getSelectedItem().toString();
 						String nombre = txtAtendido.getText();
@@ -122,19 +124,20 @@ public class RegLesion extends JDialog {
 							Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).setMiLesion(les);
 							Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).AddLesion(les);
 							Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).setEstado(false);
-							JOptionPane.showMessageDialog(null, "Se registro la lesion con exito");
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
+							JOptionPane.showMessageDialog(null, "Se registró la lesión con éxito.","Información",JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "Revise los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Revise los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 	
 						
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");

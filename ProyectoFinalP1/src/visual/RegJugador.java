@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +16,7 @@ import javax.swing.SpinnerNumberModel;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -379,6 +381,16 @@ public class RegJugador extends JDialog {
 			panel.add(lblNmero);
 			
 			JButton btnCargarImagen = new JButton("Cargar Imagen");
+			btnCargarImagen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JFileChooser fc = new JFileChooser();
+					fc.setDialogTitle("Buscar imagen");
+					
+					if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+						File arch = new File(fc.getSelectedFile().toString());
+					}
+				}
+			});
 			btnCargarImagen.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			btnCargarImagen.setBounds(643, 192, 110, 26);
 			panel.add(btnCargarImagen);
@@ -394,6 +406,7 @@ public class RegJugador extends JDialog {
 			panel_imagen.add(lblImagen);
 			
 			spnNumero = new JSpinner();
+			spnNumero.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnNumero.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnNumero.setBounds(421, 101, 162, 20);
 			panel.add(spnNumero);
@@ -407,9 +420,10 @@ public class RegJugador extends JDialog {
 				btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String nom, fecha, lanz, bat, pais, pos, equipo, num;
+						String nom, fecha, lanz, bat, pais, pos, equipo;
+						boolean val;
 						Date date;
-						int peso, altura, AB, D, H, HR, doble, triple, BB, SO;
+						int peso, altura, AB, D, H, HR, doble, triple, BB, SO, num;
 						int H_Pitch, D_Pitch, CL, BB_Pitch, HR_Pitch, SO_Pitch;
 						Estadistica estad;
 						EstadPitcher estadPit;
@@ -426,7 +440,7 @@ public class RegJugador extends JDialog {
 						equipo = cbxEquipo.getSelectedItem().toString();
 						peso = Integer.parseInt(spnPeso.getValue().toString());
 						altura = Integer.parseInt(spnAltura.getValue().toString());
-						num = spnNumero.getValue().toString();
+						num = Integer.parseInt(spnNumero.getValue().toString());
 						
 						//Estadisticas del Jugador de Campo
 						AB = Integer.parseInt(spnAB.getValue().toString());
@@ -446,31 +460,38 @@ public class RegJugador extends JDialog {
 						HR_Pitch = Integer.parseInt(spnHR_Pitch.getValue().toString());
 						SO_Pitch = Integer.parseInt(spnSO_Pitch.getValue().toString());
 						
+						val = Administracion.getInstancia().buscarNumJug(Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()), num);
+						
 						if(nom.isEmpty() || date == null || cbxLanzamiento.getSelectedIndex() == 0 || cbxBateo.getSelectedIndex() == 0 ||
 								cbxPais.getSelectedIndex() == 0 || cbxPosicion.getSelectedIndex() == 0 || peso == 0 || altura == 0) {
 							JOptionPane.showMessageDialog(null, "Has dejado campos vacíos o sin seleccionar.","Advertencia",JOptionPane.WARNING_MESSAGE);
 						}
 						else if(fechaNacimiento.getCalendar().get(Calendar.YEAR) >= cal.get(Calendar.YEAR) || 
 								(cal.get(Calendar.YEAR) - fechaNacimiento.getCalendar().get(Calendar.YEAR)) < 16){
-							JOptionPane.showMessageDialog(null, "La fecha no es válida.","Advertencia",JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "El jugador debe tener una fecha de nacimiento equivalente a 16 años o más.","Advertencia",JOptionPane.WARNING_MESSAGE);
+						}
+						else if(val == true){
+							JOptionPane.showMessageDialog(null, "Ya hay un jugador con este número.","Advertencia",JOptionPane.WARNING_MESSAGE);
 						}
 						else if(index != 8){
 							int edad = (cal.get(Calendar.YEAR) - fechaNacimiento.getCalendar().get(Calendar.YEAR));
-							JugCampo jc = new JugCampo(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, edad);
+							JugCampo jc = new JugCampo(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, num, edad);
 							estad = new Estadistica(AB, D ,H ,HR , doble, triple, BB, SO, 0, 0, 0, 0, 0);
 							//estad.AVG();
 							jc.setEstad(estad);
 							Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(jc);
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
 							JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
 							
 						}
 						else {
 							int edad = (cal.get(Calendar.YEAR) - fechaNacimiento.getCalendar().get(Calendar.YEAR));
-							Pitcher pit = new Pitcher(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, edad);
+							Pitcher pit = new Pitcher(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, num, edad);
 							estadPit = new EstadPitcher(0,H_Pitch, D_Pitch, CL, HR_Pitch, BB_Pitch, SO_Pitch, 0, 0, 0, 0);
 							pit.setEstad(estadPit);
 							//estadPit.PromCL();
 							Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(pit);
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
 							JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
 
 						}

@@ -1,5 +1,11 @@
 package logic;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -21,6 +27,10 @@ public class Administracion implements Serializable{
 			MiAdmin = new Administracion();
 		}
 		return MiAdmin;
+	}
+	
+	public static void setAdministracion(Administracion admi) {
+		Administracion.MiAdmin = admi;
 	}
 
 	public ArrayList<Equipo> getMisEquipos() {
@@ -56,5 +66,46 @@ public class Administracion implements Serializable{
 		}
 		
 		return null;
+	}
+	
+	public boolean buscarNumJug(Equipo e, int num) {
+		
+		for (Jugador i : e.getJugadores()) {
+			if(i.getNumero() == num) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public void Guardar(Administracion admi) {
+		File f = new File("Datos.dat");
+		
+		try {
+			FileOutputStream datos = new FileOutputStream(f);
+			ObjectOutputStream obj = new ObjectOutputStream(datos);
+			obj.writeObject(admi);
+			obj.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Administracion Cargar() {
+		
+		Administracion admi = null;
+		
+		try {
+			FileInputStream f = new FileInputStream("Datos.dat");
+			ObjectInputStream obj = new ObjectInputStream(f);
+			admi = (Administracion) obj.readObject();
+			obj.close();
+		} catch (Exception e) {
+		}
+		
+		return admi;
 	}
 }

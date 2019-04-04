@@ -78,6 +78,8 @@ public class ListEquipos extends JDialog {
 							
 							if(input == 0) {
 								Administracion.getInstancia().getMisEquipos().remove(index);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								JOptionPane.showMessageDialog(null, "El equipo ha sido eliminado.","Información",JOptionPane.INFORMATION_MESSAGE);
 								loadTable();
 							}
 						}

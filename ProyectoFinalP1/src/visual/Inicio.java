@@ -50,9 +50,16 @@ public class Inicio extends JFrame {
 	}
 	public Inicio() {
 		
+		Administracion x = Administracion.getInstancia().Cargar();
+		
+		if(x != null) {
+			Administracion.setAdministracion(x);
+		}
+		
 		setTitle("Gesti\u00F3n de estad\u00EDsticas de b\u00E9isbol");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 834, 467);
+		setBounds(100, 100, 1048, 689);
+		setExtendedState(MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -102,17 +109,17 @@ public class Inicio extends JFrame {
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_superior, GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+				.addComponent(panel_superior, GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_izq, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addGap(637))
+					.addContainerGap(851, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_superior, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_izq, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+					.addComponent(panel_izq, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
 		);
 		
 		panel_Nuevo = new JPanel();

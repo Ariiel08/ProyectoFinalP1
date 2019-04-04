@@ -74,7 +74,14 @@ public class ListPartidos extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(Administracion.getInstancia().getMisPartidos().size() != 0) {
-							Administracion.getInstancia().getMisPartidos().remove(index);
+							int input = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar el equipo?","Confirmación",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+							
+							if(input == 0) {
+								Administracion.getInstancia().getMisPartidos().remove(index);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								JOptionPane.showMessageDialog(null, "El partido ha sido eliminado.","Información",JOptionPane.INFORMATION_MESSAGE);
+							}
+							
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "No has seleccionado un partido.","Aviso",JOptionPane.WARNING_MESSAGE);

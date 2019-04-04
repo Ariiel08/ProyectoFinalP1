@@ -37,7 +37,7 @@ public class GestionarLesiones extends JDialog {
 	private static JComboBox cbxEquipos;
 	private ArrayList<String> NombresEquipos = new ArrayList<String>();
 	private JButton btnRecuperacion;
-	private JButton okButton;
+	private JButton btnRegistrarLesion;
 	private JButton btnHistorialDeLesiones;
 	/**
 	 * Launch the application.
@@ -47,7 +47,10 @@ public class GestionarLesiones extends JDialog {
 	 * Create the dialog.
 	 */
 	public GestionarLesiones() {
+		setTitle("Gestionar lesiones");
+		setResizable(false);
 		setBounds(100, 100, 823, 408);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -58,7 +61,7 @@ public class GestionarLesiones extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JLabel lblNewLabel = new JLabel("Seleccione Equipo");
+			JLabel lblNewLabel = new JLabel("Seleccione Equipo:");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblNewLabel.setBounds(10, 22, 148, 14);
 			panel.add(lblNewLabel);
@@ -82,7 +85,6 @@ public class GestionarLesiones extends JDialog {
 			panel.add(scrollPane);
 			
 			
-			
 			String[] header = {"Nombre", "Posición", "Estado", "Tipo de lesion", "Dias de reposo"};
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(header);
@@ -94,7 +96,7 @@ public class GestionarLesiones extends JDialog {
 						index = table.getSelectedRow();
 						btnHistorialDeLesiones.setEnabled(true);
 						btnRecuperacion.setEnabled(true);
-						okButton.setEnabled(true);
+						btnRegistrarLesion.setEnabled(true);
 					}
 
 				}
@@ -109,10 +111,11 @@ public class GestionarLesiones extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnHistorialDeLesiones = new JButton("Historial de Lesiones");
+			btnHistorialDeLesiones.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			btnHistorialDeLesiones.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).getMisLesiones().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "El jugador nunca a sufrido una lesion");
+						JOptionPane.showMessageDialog(null, "El jugador nunca ha sufrido una lesión.");
 					}
 					else {
 						HistorialLesiones HL = new HistorialLesiones(index, cbxEquipos.getSelectedIndex());
@@ -125,12 +128,14 @@ public class GestionarLesiones extends JDialog {
 			buttonPane.add(btnHistorialDeLesiones);
 			
 			btnRecuperacion = new JButton("Recuperacion");
+			btnRecuperacion.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			btnRecuperacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int check = JOptionPane.showConfirmDialog(null, "¿El jugador se recupero?", "Aviso", JOptionPane.WARNING_MESSAGE);
+					int check = JOptionPane.showConfirmDialog(null, "¿El jugador se recuperó?", "Aviso", JOptionPane.WARNING_MESSAGE);
 					if(check == JOptionPane.OK_OPTION) {
 						Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setMiLesion(null);
 						Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setEstado(true);
+						Administracion.getInstancia().Guardar(Administracion.getInstancia());
 						loadtable();
 					}
 				}
@@ -138,11 +143,12 @@ public class GestionarLesiones extends JDialog {
 			btnRecuperacion.setEnabled(false);
 			buttonPane.add(btnRecuperacion);
 			{
-				okButton = new JButton("Registrar Lesion");
-				okButton.addActionListener(new ActionListener() {
+				btnRegistrarLesion = new JButton("Registrar Lesion");
+				btnRegistrarLesion.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				btnRegistrarLesion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).isEstado() == false) {
-							JOptionPane.showMessageDialog(null, "El jugador ya se encuentra lesionado");
+							JOptionPane.showMessageDialog(null, "El jugador ya se encuentra lesionado.","Información",JOptionPane.INFORMATION_MESSAGE);
 						}
 						else {
 							RegLesion rl = new RegLesion(index, cbxEquipos.getSelectedIndex());
@@ -152,15 +158,16 @@ public class GestionarLesiones extends JDialog {
 						}
 					}
 				});
-				okButton.setEnabled(false);
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnRegistrarLesion.setEnabled(false);
+				btnRegistrarLesion.setActionCommand("OK");
+				buttonPane.add(btnRegistrarLesion);
+				getRootPane().setDefaultButton(btnRegistrarLesion);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				btnCancelar.setActionCommand("Cancel");
+				buttonPane.add(btnCancelar);
 			}
 		}
 	}

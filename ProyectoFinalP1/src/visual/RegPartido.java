@@ -34,6 +34,7 @@ public class RegPartido extends JDialog {
 	private JComboBox cbxVisitante;
 	
 	public RegPartido() {
+		
 		setResizable(false);
 		setTitle("Registrar  Partido");
 		setBounds(100, 100, 610, 192);
@@ -140,6 +141,8 @@ public class RegPartido extends JDialog {
 							estadio = local.getEstadio();
 							Partido p = new Partido(visitante,local,estadio,0,0,0,0,0,0,hora,fecha);
 							Administracion.getInstancia().getMisPartidos().add(p);
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
+							JOptionPane.showMessageDialog(null, "Se registró el jugador con éxito.","Información",JOptionPane.INFORMATION_MESSAGE);
 							
 						}
 					}

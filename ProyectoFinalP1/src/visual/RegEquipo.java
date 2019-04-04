@@ -102,6 +102,7 @@ public class RegEquipo extends JDialog {
 						if(!nombre.equalsIgnoreCase("") && !estadio.equalsIgnoreCase("") && !provincia.equalsIgnoreCase("")) {
 							Equipo aux = new Equipo(nombre, provincia, estadio, 0, 0, 0, 0, manager);
 							Administracion.getInstancia().insertarEquipo(aux);
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
 							dispose();
 						}
 						else {
