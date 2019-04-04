@@ -32,6 +32,7 @@ public class ListPartidos extends JDialog {
 	public static Object[] fila;
 	private static DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	private JButton btnEliminar;
+	private JButton btnJugarPartido;
 	private int index;
 	
 	public ListPartidos() {
@@ -55,7 +56,7 @@ public class ListPartidos extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						btnEliminar.setEnabled(true);
-						
+						btnJugarPartido.setEnabled(true);
 						index = table.getSelectedRow();
 					}
 				});
@@ -89,7 +90,7 @@ public class ListPartidos extends JDialog {
 					}
 				});
 				{
-					JButton btnJugarPartido = new JButton("Jugar partido");
+					btnJugarPartido = new JButton("Jugar partido");
 					btnJugarPartido.setEnabled(false);
 					btnJugarPartido.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -99,7 +100,7 @@ public class ListPartidos extends JDialog {
 								indexLocal = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getLocal().getNombre());
 								indexVis = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getVisitante().getNombre());
 								
-								Simulacion sim = new Simulacion();
+								Simulacion sim = new Simulacion(indexLocal, indexVis);
 								sim.setModal(true);
 								sim.setVisible(true);		
 							}
