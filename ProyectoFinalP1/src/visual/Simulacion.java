@@ -84,6 +84,8 @@ public class Simulacion extends JDialog {
 	private static JTable TablePitcherVisitante;
 	public static DefaultTableModel modelPitcherLocal;
 	public static DefaultTableModel modelPitcherVisitante;
+	private JLabel NombreEquipoLocal;
+	private JLabel NombreEquipoVisitante;
 	
 	public static int Hits = 0;
 	public static int CarrerasTotalesLocal = 0;
@@ -491,20 +493,40 @@ public class Simulacion extends JDialog {
 						}
 					}
 					else if(EntradaAux == 18) {
-						JOptionPane.showMessageDialog(null, "El partido a terminado");
-						btnCambioDeTurno.setEnabled(false);
+						int local = CarrerasTotalesLocal;
+						int visitante = CarrerasTotalesVisitante;
+						if(local > visitante) {
+							JOptionPane.showMessageDialog(null, "El partido a terminado a ganado el equipo local!");
+							Administracion.getInstancia().getMisEquipos().get(Local).setJugGanados(+1);
+							Administracion.getInstancia().getMisEquipos().get(Local).setJugJugados(+1);
+							Administracion.getInstancia().getMisEquipos().get(Visitante).setJugJugados(+1);
+							Administracion.getInstancia().getMisEquipos().get(Visitante).setJugPerdidos(+1);
+							btnCambioDeTurno.setEnabled(false);
+							
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "El partido a terminado a ganado el equipo visitante!");
+							Administracion.getInstancia().getMisEquipos().get(Visitante).setJugGanados(+1);
+							Administracion.getInstancia().getMisEquipos().get(Visitante).setJugJugados(+1);
+							Administracion.getInstancia().getMisEquipos().get(Local).setJugJugados(+1);
+							Administracion.getInstancia().getMisEquipos().get(Local).setJugPerdidos(+1);
+							btnCambioDeTurno.setEnabled(false);
+						}
+						
+						
+						
 					}
 				}
 			});
 			btnCambioDeTurno.setBounds(359, 322, 137, 26);
 			panel.add(btnCambioDeTurno);
 			
-			JLabel NombreEquipoLocal = new JLabel("");
+			NombreEquipoLocal = new JLabel("");
 			NombreEquipoLocal.setFont(new Font("Dialog", Font.BOLD, 18));
 			NombreEquipoLocal.setBounds(12, 12, 225, 26);
 			panel.add(NombreEquipoLocal);
 			
-			JLabel NombreEquipoVisitante = new JLabel("");
+			NombreEquipoVisitante = new JLabel("");
 			NombreEquipoVisitante.setFont(new Font("Dialog", Font.BOLD, 18));
 			NombreEquipoVisitante.setBounds(620, 12, 225, 26);
 			panel.add(NombreEquipoVisitante);
@@ -555,6 +577,9 @@ public class Simulacion extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		NombreEquipoLocal.setText(Administracion.getInstancia().getMisEquipos().get(Local).getNombre());
+		NombreEquipoVisitante.setText(Administracion.getInstancia().getMisEquipos().get(Visitante).getNombre());
 		LoadCampoLocal();
 		LoadCampoVisitante();
 		LoadPitcherLocal();
