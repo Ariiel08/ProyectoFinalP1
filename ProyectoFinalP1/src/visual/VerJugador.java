@@ -9,12 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import logic.Administracion;
 import logic.JugCampo;
 import logic.Pitcher;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -45,6 +51,7 @@ public class VerJugador extends JDialog {
 	private JLabel lblEquipo;
 	
 	public VerJugador(int i, int e) {
+		setTitle("Perfil del Jugador");
 		MiJugador = i;
 		MiEquipo = e;
 		setBounds(100, 100, 730, 400);
@@ -55,10 +62,20 @@ public class VerJugador extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JPanel panel_1 = new JPanel();
+			JPanel panel_1 = new JPanel() {
+				protected void paintComponent(Graphics g) {
+					super.paintComponent(g);
+					Graphics2D g2 = (Graphics2D) g;
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					GradientPaint g3 = new GradientPaint(0, 0, getBackground().WHITE.brighter(), 0, getHeight(), getBackground().CYAN.brighter().brighter().brighter());
+					g2.setPaint(g3);
+					g2.fillRect(0, 0, getWidth(), getHeight());
+				}
+			};
 			panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			panel_1.setBounds(10, 37, 682, 168);
 			panel.add(panel_1);

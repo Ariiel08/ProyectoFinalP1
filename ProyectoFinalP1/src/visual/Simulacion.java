@@ -645,7 +645,7 @@ public class Simulacion extends JDialog {
 		txtTotalCarrerasLocal.setText(String.valueOf(CarrerasTotalesLocal));
 		txtTotalCarrerasVisitante.setText(String.valueOf(CarrerasTotalesVisitante));
 		txtTotalErroresLocal.setText(String.valueOf(ErroresTotalLocal));
-		txtTotalErroresVisitante.setText(String.valueOf(txtTotalErroresVisitante));
+		txtTotalErroresVisitante.setText(String.valueOf(ErroresTotalVisitante));
 		txtTotalHitsLocal.setText(String.valueOf(HitsTotalLocales));
 		txtTotalHitsVisitante.setText(String.valueOf(HitsTotalVisitantes));
 		
