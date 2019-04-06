@@ -15,6 +15,7 @@ import logic.Equipo;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ListJugadores extends JDialog {
 	public static Object[] fila;
 	private int index = 0;
 	private JButton okButton;
+	private JButton btnEliminar;
  	/**
 	 * Launch the application.
 	 */
@@ -45,6 +47,7 @@ public class ListJugadores extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListJugadores() {
+		setTitle("Lista de Jugadores");
 		
 		setBounds(100, 100, 629, 406);
 		setLocationRelativeTo(null);
@@ -70,6 +73,7 @@ public class ListJugadores extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					if(table.getSelectedRow()>=0) {
 						okButton.setEnabled(true);
+						btnEliminar.setEnabled(true);
 						index = table.getSelectedRow();
 					}
 				}
@@ -78,7 +82,7 @@ public class ListJugadores extends JDialog {
 			scrollPane.setViewportView(table);
 			
 			
-			JLabel lblJugadoresPorEquipo = new JLabel("Jugadores por Equipo");
+			JLabel lblJugadoresPorEquipo = new JLabel("Jugadores por equipo:");
 			lblJugadoresPorEquipo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblJugadoresPorEquipo.setBounds(10, 20, 156, 14);
 			panel.add(lblJugadoresPorEquipo);
@@ -113,7 +117,24 @@ public class ListJugadores extends JDialog {
 						vj.setVisible(true);
 					}
 				});
+				
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int input = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar el jugador?","Confirmación",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+						
+						if(input == 0) {
+							Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().remove(index);
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
+							JOptionPane.showMessageDialog(null, "El jugador ha sido eliminado.","Información",JOptionPane.INFORMATION_MESSAGE);
+							loadTable();
+						}
+					}
+				});
+				btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				buttonPane.add(btnEliminar);
 				okButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				btnEliminar.setEnabled(false);
 				okButton.setEnabled(false);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);

@@ -16,7 +16,9 @@ import javax.swing.SpinnerNumberModel;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +34,12 @@ import logic.Equipo;
 import logic.EstadPitcher;
 import logic.Estadistica;
 import logic.JugCampo;
+import logic.Jugador;
 import logic.Pitcher;
 
 import com.toedter.components.JLocaleChooser;
 import javax.swing.JComboBox;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -71,13 +75,21 @@ public class RegJugador extends JDialog {
 	private JSpinner spnD_Pitch;
 	private JPanel panel_estadPitcher;
 	private JPanel panel_estadisticas;
+	private JLabel lblImagen;
 	private JDateChooser fechaNacimiento;
 	private ArrayList<String> nomEquipos = new ArrayList<String>();
 	private int index;
+	private static int MiEquipo, MiJugador;
+	private boolean modi = false;
+	private static File imgjug;
+	private BufferedImage imagen;
 
-	public RegJugador() {
-		setResizable(false);
+	public RegJugador(int j, int e, boolean mod) {
+		MiJugador = j;
+		MiEquipo = e;
+		modi = mod;
 		
+		setResizable(false);
 		setTitle("Registrar jugador");
 		setBounds(-12, -36, 812, 370);
 		setLocationRelativeTo(null);
@@ -103,7 +115,7 @@ public class RegJugador extends JDialog {
 					
 					if(Character.isDigit(validar)) {
 						e.consume();
-						JOptionPane.showMessageDialog(null, "Solo se permiten letras");
+						JOptionPane.showMessageDialog(null, "Solo se permiten letras.");
 					}
 				}
 			});
@@ -387,7 +399,20 @@ public class RegJugador extends JDialog {
 					fc.setDialogTitle("Buscar imagen");
 					
 					if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+						String nomImagen;
 						File arch = new File(fc.getSelectedFile().toString());
+						
+						rsscalelabel.RSScaleLabel.setScaleLabel(lblImagen, fc.getSelectedFile().toString()); 
+						
+						try {
+							
+							imagen = ImageIO.read(arch);
+							nomImagen = "imgjugadores/" + txtNombre.getText() + ".png";
+							ImageIO.write(imagen, "png", new File(nomImagen));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
 					}
 				}
 			});
@@ -401,7 +426,7 @@ public class RegJugador extends JDialog {
 			panel.add(panel_imagen);
 			panel_imagen.setLayout(null);
 			
-			JLabel lblImagen = new JLabel("");
+			lblImagen = new JLabel("");
 			lblImagen.setBounds(0, 0, 156, 138);
 			panel_imagen.add(lblImagen);
 			
@@ -421,7 +446,7 @@ public class RegJugador extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String nom, fecha, lanz, bat, pais, pos, equipo;
-						boolean val;
+						boolean val = false;
 						Date date;
 						int peso, altura, AB, D, H, HR, doble, triple, BB, SO, num;
 						int H_Pitch, D_Pitch, CL, BB_Pitch, HR_Pitch, SO_Pitch;
@@ -460,7 +485,9 @@ public class RegJugador extends JDialog {
 						HR_Pitch = Integer.parseInt(spnHR_Pitch.getValue().toString());
 						SO_Pitch = Integer.parseInt(spnSO_Pitch.getValue().toString());
 						
-						val = Administracion.getInstancia().buscarNumJug(Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()), num);
+						if(modi == false) {
+							val = Administracion.getInstancia().buscarNumJug(Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()), num);
+						}
 						
 						if(nom.isEmpty() || date == null || cbxLanzamiento.getSelectedIndex() == 0 || cbxBateo.getSelectedIndex() == 0 ||
 								cbxPais.getSelectedIndex() == 0 || cbxPosicion.getSelectedIndex() == 0 || peso == 0 || altura == 0) {
@@ -479,9 +506,29 @@ public class RegJugador extends JDialog {
 							estad = new Estadistica(AB, D ,H ,HR , doble, triple, BB, SO, 0, 0, 0, 0, 0);
 							//estad.AVG();
 							jc.setEstad(estad);
-							Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(jc);
-							Administracion.getInstancia().Guardar(Administracion.getInstancia());
-							JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
+							
+							if(modi == true) {
+								Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().set(MiJugador, jc);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								
+								if(imgjug.exists()) {
+									try {
+										imagen = ImageIO.read(imgjug);
+										imgjug.delete();
+										imgjug = new File("imgjugadores/" + Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre() + ".png");
+										ImageIO.write(imagen, "png", new File(imgjug.toString()));
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								
+								JOptionPane.showMessageDialog(null, "Se modificó el jugador con exito.");
+							}else {
+								Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(jc);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
+							}
 							
 						}
 						else {
@@ -490,10 +537,29 @@ public class RegJugador extends JDialog {
 							estadPit = new EstadPitcher(0,H_Pitch, D_Pitch, CL, HR_Pitch, BB_Pitch, SO_Pitch, 0, 0, 0, 0);
 							pit.setEstad(estadPit);
 							//estadPit.PromCL();
-							Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(pit);
-							Administracion.getInstancia().Guardar(Administracion.getInstancia());
-							JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
-
+							
+							if(modi == true) {
+								Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().set(MiJugador, pit);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								if(imgjug.exists()) {
+									try {
+										imagen = ImageIO.read(imgjug);
+										imgjug.delete();
+										imgjug = new File("imgjugadores/" + Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre() + ".png");
+										ImageIO.write(imagen, "png", new File(imgjug.toString()));
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								
+								JOptionPane.showMessageDialog(null, "Se modificó el jugador con exito.");
+							}else {
+								Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(pit);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
+							}
+							
 						}
 					}
 				});
@@ -512,6 +578,52 @@ public class RegJugador extends JDialog {
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}
+			
+			if(modi == true) {
+				Modificar();
+			}
+		}
+	}
+	
+	public void Modificar() {
+		
+		txtNombre.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre());
+		cbxPais.setSelectedItem(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPaisOrigen());
+		fechaNacimiento.setDate(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getFechaNacimiento());
+		cbxPosicion.setSelectedItem(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPosicion());
+		spnPeso.setValue(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPeso());
+		spnAltura.setValue(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getAltura());
+		cbxLanzamiento.setSelectedItem(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getLanzamiento());
+		spnNumero.setValue(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNumero());
+		cbxBateo.setSelectedItem(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getBateo());
+		cbxEquipo.setSelectedItem(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getEquipo());
+		cbxEquipo.setEnabled(false);
+		
+		if(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador) instanceof JugCampo) {
+			Jugador jugc = (JugCampo) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador);
+			spnHR.setValue(((JugCampo) jugc).getEstad().getHR());
+			spnAB.setValue(((JugCampo) jugc).getEstad().getAB());
+			spnBB.setValue(((JugCampo) jugc).getEstad().getBB());
+			spn2B.setValue(((JugCampo) jugc).getEstad().getDobles());
+			spn3B.setValue(((JugCampo) jugc).getEstad().getTriples());
+			spnD.setValue(((JugCampo) jugc).getEstad().getD());
+			spnH.setValue(((JugCampo) jugc).getEstad().getH());
+			spnSO.setValue(((JugCampo) jugc).getEstad().getPonches());
+		}
+		else {
+			Jugador jugp = (Pitcher) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador);
+			spnHR_Pitch.setValue(((Pitcher) jugp).getEstad().getJonronPitch());
+			spnBB_Pitch.setValue(((Pitcher) jugp).getEstad().getBBPitch());
+			spnD_Pitch.setValue(((Pitcher) jugp).getEstad().getCarrPitch());
+			spnH_Pitch.setValue(((Pitcher) jugp).getEstad().getHitsPitch());
+			spnSO_Pitch.setValue(((Pitcher) jugp).getEstad().getPonches());
+			spnCL.setValue(((Pitcher) jugp).getEstad().getCarrLimpias());
+		}
+		
+		imgjug = new File("imgjugadores/" + Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre() + ".png");
+		
+		if(imgjug.exists()) {
+			rsscalelabel.RSScaleLabel.setScaleLabel(lblImagen, imgjug.toString());
 		}
 	}
 }

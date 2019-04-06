@@ -31,6 +31,7 @@ import java.awt.Color;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class VerJugador extends JDialog {
@@ -49,6 +50,7 @@ public class VerJugador extends JDialog {
 	private JLabel lblBatea;
 	private JLabel lblLanza;
 	private JLabel lblEquipo;
+	private static JLabel lblFoto;
 	
 	public VerJugador(int i, int e) {
 		setTitle("Perfil del Jugador");
@@ -208,9 +210,18 @@ public class VerJugador extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnModificar = new JButton("Modificar");
+			btnModificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegJugador regj = new RegJugador(MiJugador, MiEquipo, true); 
+					regj.setModal(true);
+					regj.setVisible(true);
+				}
+			});
+			btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			buttonPane.add(btnModificar);
 			{
 				JButton okButton = new JButton("Historial de lesiones");
+				okButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				okButton.setEnabled(false);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -218,6 +229,7 @@ public class VerJugador extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -258,5 +270,10 @@ public class VerJugador extends JDialog {
 			model.addRow(fila);
 		}
 		
+		File imgjug = new File("imgjugadores/" + Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre() + ".png");
+		
+		if(imgjug.exists()) {
+			rsscalelabel.RSScaleLabel.setScaleLabel(lblFoto, imgjug.toString());
+		}
 	}
 }

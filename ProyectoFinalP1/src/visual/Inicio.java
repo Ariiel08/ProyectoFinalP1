@@ -175,7 +175,7 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(Administracion.getInstancia().getMisEquipos().size() != 0) {
-					RegJugador regj = new RegJugador();
+					RegJugador regj = new RegJugador(0,0,false);
 					regj.setModal(true);
 					regj.setVisible(true);
 				}
