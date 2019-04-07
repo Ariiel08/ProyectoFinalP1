@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import logic.Administracion;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,8 +22,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import rsbuttom.RSButtonMetro;
+import java.awt.SystemColor;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.BevelBorder;
 
 public class VerEquipo extends JDialog {
 
@@ -43,17 +52,13 @@ public class VerEquipo extends JDialog {
 	private JLabel labelJuegosJugados;
 	private JLabel lblWR;
 	private JLabel lblNombreEquipo;
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the dialog.
-	 */
+	private JLabel LogoEquipo;
+	
 	public VerEquipo(int e) {
+		setResizable(false);
 		MiEquipo = e;
 		setTitle("Interfaz de Equipo");
-		setBounds(100, 100, 919, 504);
+		setBounds(100, 100, 909, 504);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,10 +72,11 @@ public class VerEquipo extends JDialog {
 			JPanel panel_1 = new JPanel();
 			panel_1.setBounds(10, 11, 133, 102);
 			panel.add(panel_1);
-			panel_1.setLayout(new BorderLayout(0, 0));
+			panel_1.setLayout(null);
 			
-			JLabel LogoEquipo = new JLabel("");
-			panel_1.add(LogoEquipo, BorderLayout.CENTER);
+			LogoEquipo = new JLabel("");
+			LogoEquipo.setBounds(0, 0, 133, 102);
+			panel_1.add(LogoEquipo);
 			
 			lblNombreEquipo = new JLabel("");
 			lblNombreEquipo.setFont(new Font("Leelawadee", Font.BOLD, 17));
@@ -80,8 +86,109 @@ public class VerEquipo extends JDialog {
 			lblNombreEquipo.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getNombre());
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBounds(709, 11, 174, 400);
+			panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
+			panel_2.setBounds(709, 70, 174, 341);
 			panel.add(panel_2);
+			panel_2.setLayout(null);
+			
+			RSButtonMetro btnmtrModificar = new RSButtonMetro();
+			btnmtrModificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					if(table.getSelectedRow()>=0){
+						RegJugador regj = new RegJugador(index,MiEquipo,true);
+						regj.setModal(true);
+						regj.setVisible(true);
+						loadTable();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "No has seleccionado un jugador del roster.","Aviso",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+			btnmtrModificar.setFont(new Font("Dialog", Font.BOLD, 15));
+			btnmtrModificar.setBounds(2, 2, 170, 35);
+			btnmtrModificar.setText("Modificar");
+			btnmtrModificar.setForeground(Color.GRAY);
+			btnmtrModificar.setColorTextNormal(Color.BLACK);
+			btnmtrModificar.setColorPressed(Color.DARK_GRAY);
+			btnmtrModificar.setColorNormal(SystemColor.menu);
+			btnmtrModificar.setColorHover(Color.GRAY);
+			btnmtrModificar.setBackground(SystemColor.menu);
+			panel_2.add(btnmtrModificar);
+			
+			RSButtonMetro btnmtrEliminar = new RSButtonMetro();
+			btnmtrEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(table.getSelectedRow()>=0) {
+						Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().remove(index);
+						Administracion.getInstancia().Guardar(Administracion.getInstancia());
+						loadTable();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "No has seleccionado un jugador del roster.","Aviso",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+			btnmtrEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
+			btnmtrEliminar.setBounds(2, 42, 170, 35);
+			btnmtrEliminar.setText("Eliminar");
+			btnmtrEliminar.setForeground(Color.GRAY);
+			btnmtrEliminar.setColorTextNormal(Color.BLACK);
+			btnmtrEliminar.setColorPressed(Color.DARK_GRAY);
+			btnmtrEliminar.setColorNormal(SystemColor.menu);
+			btnmtrEliminar.setColorHover(Color.GRAY);
+			btnmtrEliminar.setBackground(SystemColor.menu);
+			panel_2.add(btnmtrEliminar);
+			
+			RSButtonMetro btnmtrRegistrarLesion = new RSButtonMetro();
+			btnmtrRegistrarLesion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(table.getSelectedRow()>=0) {
+						RegLesion regl = new RegLesion(index,MiEquipo);
+						regl.setModal(true);
+						regl.setVisible(true);
+						loadTable();
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "No has seleccionado un jugador del roster.","Aviso",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+			btnmtrRegistrarLesion.setText("Registrar lesion");
+			btnmtrRegistrarLesion.setForeground(Color.GRAY);
+			btnmtrRegistrarLesion.setFont(new Font("Dialog", Font.BOLD, 15));
+			btnmtrRegistrarLesion.setColorTextNormal(Color.BLACK);
+			btnmtrRegistrarLesion.setColorPressed(Color.DARK_GRAY);
+			btnmtrRegistrarLesion.setColorNormal(SystemColor.menu);
+			btnmtrRegistrarLesion.setColorHover(Color.GRAY);
+			btnmtrRegistrarLesion.setBackground(SystemColor.menu);
+			btnmtrRegistrarLesion.setBounds(2, 82, 170, 35);
+			panel_2.add(btnmtrRegistrarLesion);
+			
+			RSButtonMetro btnmtrVerJugador = new RSButtonMetro();
+			btnmtrVerJugador.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(table.getSelectedRow()>=0) {
+						VerJugador vj = new VerJugador(index,MiEquipo);
+						vj.setModal(true);
+						vj.setVisible(true);
+						loadTable();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "No has seleccionado un jugador del roster.","Aviso",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+			btnmtrVerJugador.setText("Ver jugador");
+			btnmtrVerJugador.setForeground(Color.GRAY);
+			btnmtrVerJugador.setFont(new Font("Dialog", Font.BOLD, 15));
+			btnmtrVerJugador.setColorTextNormal(Color.BLACK);
+			btnmtrVerJugador.setColorPressed(Color.DARK_GRAY);
+			btnmtrVerJugador.setColorNormal(SystemColor.menu);
+			btnmtrVerJugador.setColorHover(Color.GRAY);
+			btnmtrVerJugador.setBackground(SystemColor.menu);
+			btnmtrVerJugador.setBounds(2, 122, 170, 35);
+			panel_2.add(btnmtrVerJugador);
 			
 			JPanel panel_3 = new JPanel();
 			panel_3.setBounds(10, 138, 667, 270);
@@ -162,10 +269,11 @@ public class VerEquipo extends JDialog {
 			PanelRoster.add(scrollPane, BorderLayout.CENTER);
 			
 			
-			String[] header = {"Nombre", "Pocision", "Pais de Origen", "Edad"};
+			String[] header = {"Nombre", "Pocision", "Pais de Origen", "Edad","Estado"};
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(header);
 			table = new JTable();
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -208,18 +316,22 @@ public class VerEquipo extends JDialog {
 			PanelEstadistica.add(labelCLT);
 			
 			lblJuegosGanados = new JLabel("");
+			lblJuegosGanados.setFont(new Font("Dialog", Font.BOLD, 15));
 			lblJuegosGanados.setBounds(158, 29, 96, 41);
 			PanelEstadistica.add(lblJuegosGanados);
 			
 			lblJuegosPerdidos = new JLabel("");
+			lblJuegosPerdidos.setFont(new Font("Dialog", Font.BOLD, 15));
 			lblJuegosPerdidos.setBounds(158, 99, 96, 41);
 			PanelEstadistica.add(lblJuegosPerdidos);
 			
 			lblCantidadLesionados = new JLabel("");
+			lblCantidadLesionados.setFont(new Font("Dialog", Font.BOLD, 15));
 			lblCantidadLesionados.setBounds(319, 169, 96, 41);
 			PanelEstadistica.add(lblCantidadLesionados);
 			
 			labelJuegosJugados = new JLabel("");
+			labelJuegosJugados.setFont(new Font("Dialog", Font.BOLD, 15));
 			labelJuegosJugados.setBounds(554, 53, 96, 41);
 			PanelEstadistica.add(labelJuegosJugados);
 			
@@ -231,6 +343,11 @@ public class VerEquipo extends JDialog {
 			lblJuegosPerdidos.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugPerdidos()));
 			lblCantidadLesionados.setText("0");
 			labelJuegosJugados.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugJugados()));
+			
+			JLabel lblControlRoster = new JLabel("Control Roster");
+			lblControlRoster.setFont(new Font("Dialog", Font.BOLD, 15));
+			lblControlRoster.setBounds(744, 41, 112, 16);
+			panel.add(lblControlRoster);
 			
 			int victorias = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugGanados();
 			int derrotas = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugPerdidos();
@@ -250,6 +367,7 @@ public class VerEquipo extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -281,8 +399,20 @@ public class VerEquipo extends JDialog {
 			fila[2] = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i).getPaisOrigen();
 			fila[3] = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i).getEdad();
 			
+			if(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i).isEstado() == true) {
+				fila[4] =  "En forma";
+			}
+			else {
+				fila[4] = "Lesionado";
+			}
+			
 			model.addRow(fila);
 		}
 		
+		File imgjug = new File("imgequipos/" + Administracion.getInstancia().getMisEquipos().get(MiEquipo).getNombre() + ".png");
+		
+		if(imgjug.exists()) {
+			rsscalelabel.RSScaleLabel.setScaleLabel(LogoEquipo, imgjug.toString());
+		}
 	}
 }

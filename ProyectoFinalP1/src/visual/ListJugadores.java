@@ -36,7 +36,7 @@ public class ListJugadores extends JDialog {
 	public static DefaultTableModel model;
 	public static Object[] fila;
 	private int index = 0;
-	private JButton okButton;
+	private JButton btnVerJugador;
 	private JButton btnEliminar;
  	/**
 	 * Launch the application.
@@ -47,9 +47,10 @@ public class ListJugadores extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListJugadores() {
+		setResizable(false);
 		setTitle("Lista de Jugadores");
 		
-		setBounds(100, 100, 629, 406);
+		setBounds(100, 100, 616, 406);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,7 +73,7 @@ public class ListJugadores extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if(table.getSelectedRow()>=0) {
-						okButton.setEnabled(true);
+						btnVerJugador.setEnabled(true);
 						btnEliminar.setEnabled(true);
 						index = table.getSelectedRow();
 					}
@@ -109,12 +110,13 @@ public class ListJugadores extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				okButton = new JButton("Ver Jugador");
-				okButton.addActionListener(new ActionListener() {
+				btnVerJugador = new JButton("Ver Jugador");
+				btnVerJugador.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						VerJugador vj = new VerJugador(index, cbxEquipos.getSelectedIndex());
 						vj.setModal(true);
 						vj.setVisible(true);
+						loadTable();
 					}
 				});
 				
@@ -133,12 +135,12 @@ public class ListJugadores extends JDialog {
 				});
 				btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				buttonPane.add(btnEliminar);
-				okButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				btnVerJugador.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				btnEliminar.setEnabled(false);
-				okButton.setEnabled(false);
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnVerJugador.setEnabled(false);
+				btnVerJugador.setActionCommand("OK");
+				buttonPane.add(btnVerJugador);
+				getRootPane().setDefaultButton(btnVerJugador);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");

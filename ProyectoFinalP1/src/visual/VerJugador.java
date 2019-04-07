@@ -50,13 +50,15 @@ public class VerJugador extends JDialog {
 	private JLabel lblBatea;
 	private JLabel lblLanza;
 	private JLabel lblEquipo;
+	private JLabel lblNumero;
 	private static JLabel lblFoto;
 	
 	public VerJugador(int i, int e) {
+		setResizable(false);
 		setTitle("Perfil del Jugador");
 		MiJugador = i;
 		MiEquipo = e;
-		setBounds(100, 100, 730, 400);
+		setBounds(100, 100, 716, 400);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,19 +85,13 @@ public class VerJugador extends JDialog {
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
-			JPanel panel_3 = new JPanel();
-			panel_3.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			panel_3.setBounds(480, 12, 190, 144);
-			panel_1.add(panel_3);
-			panel_3.setLayout(null);
-			
-			JLabel lblFoto = new JLabel("");
-			lblFoto.setBounds(12, 12, 166, 120);
-			panel_3.add(lblFoto);
+			lblFoto = new JLabel("");
+			lblFoto.setBounds(480, 12, 190, 144);
+			panel_1.add(lblFoto);
 			
 			lblNombreApellido = new JLabel("");
 			lblNombreApellido.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblNombreApellido.setBounds(12, 18, 403, 26);
+			lblNombreApellido.setBounds(12, 18, 251, 26);
 			panel_1.add(lblNombreApellido);
 			
 			JLabel lblEdad = new JLabel("Edad:");
@@ -125,7 +121,7 @@ public class VerJugador extends JDialog {
 			
 			lblAltura = new JLabel("");
 			lblAltura.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblAltura.setBounds(338, 62, 55, 16);
+			lblAltura.setBounds(349, 62, 55, 16);
 			panel_1.add(lblAltura);
 			
 			JLabel labelPocision = new JLabel("Posici\u00F3n:");
@@ -190,6 +186,20 @@ public class VerJugador extends JDialog {
 			lblLanza.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getLanzamiento());
 			lblPais.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPaisOrigen());
 			lblPosicion.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPosicion());
+
+			
+			
+			JLabel lblNmero = new JLabel("N\u00FAmero:");
+			lblNmero.setFont(new Font("Tahoma", Font.BOLD, 15));
+			lblNmero.setBounds(275, 24, 79, 16);
+			panel_1.add(lblNmero);
+			
+			lblNumero = new JLabel("");
+			lblNumero.setFont(new Font("Tahoma", Font.BOLD, 15));
+			lblNumero.setBounds(349, 24, 55, 16);
+			panel_1.add(lblNumero);
+			
+			lblNumero.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNumero()));
 			
 			JLabel lblEstadisticasTemporadaRegular = new JLabel("Estadisticas Temporada Regular");
 			lblEstadisticasTemporadaRegular.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -215,6 +225,7 @@ public class VerJugador extends JDialog {
 					RegJugador regj = new RegJugador(MiJugador, MiEquipo, true); 
 					regj.setModal(true);
 					regj.setVisible(true);
+					RecargarDatos();
 				}
 			});
 			btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -275,5 +286,17 @@ public class VerJugador extends JDialog {
 		if(imgjug.exists()) {
 			rsscalelabel.RSScaleLabel.setScaleLabel(lblFoto, imgjug.toString());
 		}
+	}
+	
+	public void RecargarDatos() {
+		lblNombreApellido.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre());
+		lblAltura.setText((String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getAltura())) + "'");
+	    lblEdaad.setText((String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getEdad())));
+		lblBatea.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getBateo());
+		lblLanza.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getLanzamiento());
+		lblPais.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPaisOrigen());
+		lblPosicion.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getPosicion());
+		lblNumero.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNumero()));
+		loadtable();
 	}
 }

@@ -89,8 +89,13 @@ public class RegJugador extends JDialog {
 		MiEquipo = e;
 		modi = mod;
 		
+		if(mod == true) {
+			setTitle("Modificar jugador");
+		}
+		else {
+			setTitle("Registrar jugador");
+		}
 		setResizable(false);
-		setTitle("Registrar jugador");
 		setBounds(-12, -36, 812, 370);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -288,7 +293,7 @@ public class RegJugador extends JDialog {
 			spnD.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			
 			spnSO = new JSpinner();
-			spnSO.setModel(new SpinnerNumberModel(0, null, 999, 1));
+			spnSO.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnSO.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnSO.setBounds(464, 48, 47, 23);
 			panel_estadisticas.add(spnSO);
@@ -311,6 +316,7 @@ public class RegJugador extends JDialog {
 			panel_estadPitcher.add(lblH_Pitch);
 			
 			spnH_Pitch = new JSpinner();
+			spnH_Pitch.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnH_Pitch.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnH_Pitch.setBounds(104, 48, 47, 23);
 			panel_estadPitcher.add(spnH_Pitch);
@@ -321,6 +327,7 @@ public class RegJugador extends JDialog {
 			panel_estadPitcher.add(lblCL);
 			
 			spnCL = new JSpinner();
+			spnCL.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnCL.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnCL.setBounds(222, 48, 47, 23);
 			panel_estadPitcher.add(spnCL);
@@ -331,6 +338,7 @@ public class RegJugador extends JDialog {
 			panel_estadPitcher.add(lblBB_Pitch);
 			
 			spnBB_Pitch = new JSpinner();
+			spnBB_Pitch.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnBB_Pitch.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnBB_Pitch.setBounds(281, 48, 47, 23);
 			panel_estadPitcher.add(spnBB_Pitch);
@@ -341,6 +349,7 @@ public class RegJugador extends JDialog {
 			panel_estadPitcher.add(lblHR_Pitcher);
 			
 			spnHR_Pitch = new JSpinner();
+			spnHR_Pitch.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnHR_Pitch.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnHR_Pitch.setBounds(340, 48, 47, 23);
 			panel_estadPitcher.add(spnHR_Pitch);
@@ -351,6 +360,7 @@ public class RegJugador extends JDialog {
 			panel_estadPitcher.add(lblSO);
 			
 			spnSO_Pitch = new JSpinner();
+			spnSO_Pitch.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnSO_Pitch.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnSO_Pitch.setBounds(399, 48, 47, 23);
 			panel_estadPitcher.add(spnSO_Pitch);
@@ -361,6 +371,7 @@ public class RegJugador extends JDialog {
 			panel_estadPitcher.add(lblD_Pitch);
 			
 			spnD_Pitch = new JSpinner();
+			spnD_Pitch.setModel(new SpinnerNumberModel(0, 0, 999, 1));
 			spnD_Pitch.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			spnD_Pitch.setBounds(163, 48, 47, 23);
 			panel_estadPitcher.add(spnD_Pitch);
@@ -438,6 +449,7 @@ public class RegJugador extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -524,10 +536,20 @@ public class RegJugador extends JDialog {
 								}
 								
 								JOptionPane.showMessageDialog(null, "Se modificó el jugador con exito.");
+								dispose();
 							}else {
+								int input;
 								Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(jc);
 								Administracion.getInstancia().Guardar(Administracion.getInstancia());
 								JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
+								input = JOptionPane.showConfirmDialog(null, "¿Desea registrar otro jugador?","Confirmación",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+								
+								if(input == 0) {
+									VaciarCampos();
+								}
+								else {
+									dispose();
+								}
 							}
 							
 						}
@@ -554,10 +576,20 @@ public class RegJugador extends JDialog {
 								}
 								
 								JOptionPane.showMessageDialog(null, "Se modificó el jugador con exito.");
+								dispose();
 							}else {
+								int input;
 								Administracion.getInstancia().getMisEquipos().get(cbxEquipo.getSelectedIndex()).getJugadores().add(pit);
 								Administracion.getInstancia().Guardar(Administracion.getInstancia());
 								JOptionPane.showMessageDialog(null, "Se registró el jugador con exito.");
+								input = JOptionPane.showConfirmDialog(null, "¿Desea registrar otro jugador?","Confirmación",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+								
+								if(input == 0) {
+									VaciarCampos();
+								}
+								else {
+									dispose();
+								}
 							}
 							
 						}
@@ -625,5 +657,36 @@ public class RegJugador extends JDialog {
 		if(imgjug.exists()) {
 			rsscalelabel.RSScaleLabel.setScaleLabel(lblImagen, imgjug.toString());
 		}
+	}
+	
+	public void VaciarCampos() {
+		txtNombre.setText("");
+		cbxPais.setSelectedIndex(0);
+		fechaNacimiento.setDate(null);
+		cbxPosicion.setSelectedIndex(0);
+		spnPeso.setValue(80);
+		spnAltura.setValue(163);
+		cbxLanzamiento.setSelectedIndex(0);
+		spnNumero.setValue(0);
+		cbxBateo.setSelectedIndex(0);
+		cbxEquipo.setSelectedIndex(0);
+		
+		spnAB.setValue(0);
+		spnD.setValue(0);
+		spn2B.setValue(0);
+		spn3B.setValue(0);
+		spnBB.setValue(0);
+		spnH.setValue(0);
+		spnSO.setValue(0);
+		spnHR.setValue(0);
+		
+		spnBB_Pitch.setValue(0);
+		spnCL.setValue(0);
+		spnD_Pitch.setValue(0);
+		spnH_Pitch.setValue(0);
+		spnHR_Pitch.setValue(0);
+		spnSO_Pitch.setValue(0);
+		
+		lblImagen.setIcon(null);
 	}
 }
