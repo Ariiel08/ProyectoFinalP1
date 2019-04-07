@@ -131,12 +131,17 @@ public class GestionarLesiones extends JDialog {
 			btnRecuperacion.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			btnRecuperacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int check = JOptionPane.showConfirmDialog(null, "¿El jugador se recuperó?", "Aviso", JOptionPane.WARNING_MESSAGE);
-					if(check == JOptionPane.OK_OPTION) {
-						Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setMiLesion(null);
-						Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setEstado(true);
-						Administracion.getInstancia().Guardar(Administracion.getInstancia());
-						loadtable();
+					if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).isEstado()) {
+						int check = JOptionPane.showConfirmDialog(null, "¿El jugador se recuperó?", "Aviso", JOptionPane.WARNING_MESSAGE);
+						if(check == JOptionPane.OK_OPTION) {
+							Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setMiLesion(null);
+							Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setEstado(true);
+							Administracion.getInstancia().Guardar(Administracion.getInstancia());
+							loadtable();
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "El jugador esta en plena forma.");
 					}
 				}
 			});

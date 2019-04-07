@@ -99,15 +99,21 @@ public class ListPartidos extends JDialog {
 								
 								indexLocal = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getLocal().getNombre());
 								indexVis = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getVisitante().getNombre());
-								if(Administracion.getInstancia().getMisPartidos().get(index).isEstado()) {
-									Simulacion sim = new Simulacion(indexLocal, indexVis);
-									sim.setModal(true);
-									sim.setVisible(true);
-									Administracion.getInstancia().getMisPartidos().get(index).setEstado(false);
-									loadTable();
+								if(Administracion.getInstancia().getMisEquipos().get(indexLocal).getJugadores().size() >= 9 && Administracion.getInstancia().getMisEquipos().get(indexVis).getJugadores().size() >= 9) {
+									if(Administracion.getInstancia().getMisPartidos().get(index).isEstado()) {
+										Simulacion sim = new Simulacion(indexLocal, indexVis);
+										sim.setModal(true);
+										sim.setVisible(true);
+										Administracion.getInstancia().getMisPartidos().get(index).setEstado(false);
+										loadTable();
+									}
+									else {
+										JOptionPane.showMessageDialog(null, "El partido ya se jugo.","Aviso",JOptionPane.WARNING_MESSAGE);
+									
+									}
 								}
 								else {
-									JOptionPane.showMessageDialog(null, "El partido ya se jugo.","Aviso",JOptionPane.WARNING_MESSAGE);
+									JOptionPane.showMessageDialog(null, "Necesita un minimo de 9 jugadores en cada equipo","Aviso",JOptionPane.WARNING_MESSAGE);
 								}
 
 							}
