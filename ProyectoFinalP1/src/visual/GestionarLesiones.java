@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 public class GestionarLesiones extends JDialog {
 
@@ -89,6 +90,7 @@ public class GestionarLesiones extends JDialog {
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(header);
 			table = new JTable();
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {

@@ -14,6 +14,7 @@ import com.toedter.calendar.JDateChooser;
 
 import logic.Administracion;
 import logic.Equipo;
+import logic.Jugador;
 import logic.Partido;
 
 import javax.swing.JComboBox;
@@ -138,12 +139,30 @@ public class RegPartido extends JDialog {
 							JOptionPane.showMessageDialog(null, "Has dejado campos vacíos.","Aviso",JOptionPane.WARNING_MESSAGE);
 						}
 						else {
-							estadio = local.getEstadio();
-							Partido p = new Partido(visitante,local,estadio,0,0,0,0,0,0,hora,fecha);
-							Administracion.getInstancia().getMisPartidos().add(p);
-							Administracion.getInstancia().Guardar(Administracion.getInstancia());
-							JOptionPane.showMessageDialog(null, "Se registró el jugador con éxito.","Información",JOptionPane.INFORMATION_MESSAGE);
+							int cont1 = 0,cont2 = 0;
 							
+							for (Jugador i : local.getJugadores()) {
+								if(i.isEstado() == true) {
+									cont1++;
+								}
+							}
+							
+							for (Jugador i : visitante.getJugadores()) {
+								if(i.isEstado() == true) {
+									cont2++;
+								}
+							}
+							
+							if(cont1 >= 9 && cont2 >= 9) {
+								estadio = local.getEstadio();
+								Partido p = new Partido(visitante,local,estadio,0,0,0,0,0,0,hora,fecha);
+								Administracion.getInstancia().getMisPartidos().add(p);
+								Administracion.getInstancia().Guardar(Administracion.getInstancia());
+								JOptionPane.showMessageDialog(null, "Se registró el partido con éxito.","Información",JOptionPane.INFORMATION_MESSAGE);
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Uno de los equipos no tiene jugadores activos suficientes.","Aviso",JOptionPane.WARNING_MESSAGE);
+							}
 						}
 					}
 				});

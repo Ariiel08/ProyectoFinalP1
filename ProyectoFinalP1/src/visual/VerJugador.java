@@ -111,7 +111,7 @@ public class VerJugador extends JDialog {
 			
 			lblPais = new JLabel("");
 			lblPais.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblPais.setBounds(68, 96, 134, 16);
+			lblPais.setBounds(68, 96, 195, 16);
 			panel_1.add(lblPais);
 			
 			JLabel labelAltura = new JLabel("Altura:");
@@ -174,6 +174,7 @@ public class VerJugador extends JDialog {
 				}
 				
 				table = new JTable();
+				table.setRowSelectionAllowed(false);
 				scrollPane.setViewportView(table);
 				table.setModel(model);
 				loadtable();

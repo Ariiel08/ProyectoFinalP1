@@ -135,11 +135,12 @@ public class Inicio extends JFrame {
 		
 		panel_Nuevo = new JPanel();
 		panel_Nuevo.setBackground(SystemColor.menu);
-		panel_Nuevo.setBounds(0, 0, 170, 210);
+		panel_Nuevo.setBounds(0, 0, 170, 225);
 		panel_izq.add(panel_Nuevo);
 		panel_Nuevo.setLayout(null);
 		
 		RSButtonMetro btnmtrPartido = new RSButtonMetro();
+		btnmtrPartido.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Nuevo Partido.png")));
 		btnmtrPartido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -155,7 +156,7 @@ public class Inicio extends JFrame {
 		});
 		btnmtrPartido.setBounds(0, 105, 170, 35);
 		panel_Nuevo.add(btnmtrPartido);
-		btnmtrPartido.setText("Partido");
+		btnmtrPartido.setText("Partido ");
 		btnmtrPartido.setForeground(Color.GRAY);
 		btnmtrPartido.setColorTextNormal(Color.GRAY);
 		btnmtrPartido.setColorPressed(Color.DARK_GRAY);
@@ -164,6 +165,7 @@ public class Inicio extends JFrame {
 		btnmtrPartido.setBackground(SystemColor.menu);
 		
 		RSButtonMetro btnEquipo = new RSButtonMetro();
+		btnEquipo.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Equipo.png")));
 		btnEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegEquipo regE = new RegEquipo();
@@ -173,7 +175,7 @@ public class Inicio extends JFrame {
 		});
 		btnEquipo.setBounds(0, 70, 170, 35);
 		panel_Nuevo.add(btnEquipo);
-		btnEquipo.setText("Equipo");
+		btnEquipo.setText("Equipo  ");
 		btnEquipo.setForeground(Color.GRAY);
 		btnEquipo.setColorTextNormal(Color.GRAY);
 		btnEquipo.setColorPressed(Color.DARK_GRAY);
@@ -182,6 +184,7 @@ public class Inicio extends JFrame {
 		btnEquipo.setBackground(SystemColor.menu);
 		
 		RSButtonMetro btnJugador = new RSButtonMetro();
+		btnJugador.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Nuevo jug2.png")));
 		btnJugador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -212,7 +215,7 @@ public class Inicio extends JFrame {
 		lblNuevo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		panel_Gestion = new JPanel();
-		panel_Gestion.setBounds(0, 0, 170, 210);
+		panel_Gestion.setBounds(0, 0, 170, 225);
 		panel_izq.add(panel_Gestion);
 		panel_Gestion.setLayout(null);
 		panel_Gestion.setVisible(false);
@@ -306,9 +309,9 @@ public class Inicio extends JFrame {
 		btnmtrLesiones.setBounds(0, 138, 170, 35);
 		panel_Gestion.add(btnmtrLesiones);
 		
-		RSButtonMetro btnTest = new RSButtonMetro();
-		btnTest.setToolTipText("Gestionar");
-		btnTest.addActionListener(new ActionListener() {
+		RSButtonMetro btnGestion = new RSButtonMetro();
+		btnGestion.setToolTipText("Gestionar");
+		btnGestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				panel_Nuevo.setVisible(false);
@@ -326,13 +329,29 @@ public class Inicio extends JFrame {
 				Animacion.Animacion.mover_derecha(-188, 0, 2, 2, panel_izq);
 			}
 		});
-		btnTest.setColorHover(new Color(0, 102, 204));
-		btnTest.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Control-Panel-icon.png")));
-		btnTest.setBackground(new Color(0, 0, 128));
-		btnTest.setColorPressed(new Color(0, 0, 128));
-		btnTest.setColorNormal(new Color(0, 0, 128));
-		btnTest.setBounds(46, 0, 44, 51);
-		panel_superior.add(btnTest);
+		btnGestion.setColorHover(new Color(0, 102, 204));
+		btnGestion.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Control-Panel-icon.png")));
+		btnGestion.setBackground(new Color(0, 0, 128));
+		btnGestion.setColorPressed(new Color(0, 0, 128));
+		btnGestion.setColorNormal(new Color(0, 0, 128));
+		btnGestion.setBounds(46, 0, 44, 51);
+		panel_superior.add(btnGestion);
+		
+		RSButtonMetro buttonMetro = new RSButtonMetro();
+		buttonMetro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Ranking rank = new Ranking();
+				rank.setModal(true);
+				rank.setVisible(true);
+			}
+		});
+		buttonMetro.setToolTipText("Gestionar");
+		buttonMetro.setColorPressed(new Color(0, 0, 128));
+		buttonMetro.setColorNormal(new Color(0, 0, 128));
+		buttonMetro.setColorHover(new Color(0, 102, 204));
+		buttonMetro.setBackground(new Color(0, 0, 128));
+		buttonMetro.setBounds(89, 0, 44, 51);
+		panel_superior.add(buttonMetro);
 		panel.setLayout(gl_panel);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

@@ -32,6 +32,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
+import javax.swing.ImageIcon;
 
 public class VerEquipo extends JDialog {
 
@@ -92,6 +93,7 @@ public class VerEquipo extends JDialog {
 			panel_2.setLayout(null);
 			
 			RSButtonMetro btnmtrModificar = new RSButtonMetro();
+			btnmtrModificar.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/Modificar Jug.png")));
 			btnmtrModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(table.getSelectedRow()>=0){
@@ -117,6 +119,7 @@ public class VerEquipo extends JDialog {
 			panel_2.add(btnmtrModificar);
 			
 			RSButtonMetro btnmtrEliminar = new RSButtonMetro();
+			btnmtrEliminar.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/Eliminar jug.png")));
 			btnmtrEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(table.getSelectedRow()>=0) {
@@ -131,7 +134,7 @@ public class VerEquipo extends JDialog {
 			});
 			btnmtrEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrEliminar.setBounds(2, 42, 170, 35);
-			btnmtrEliminar.setText("Eliminar Jugador");
+			btnmtrEliminar.setText("Eliminar Jugador  ");
 			btnmtrEliminar.setForeground(Color.GRAY);
 			btnmtrEliminar.setColorTextNormal(Color.BLACK);
 			btnmtrEliminar.setColorPressed(Color.DARK_GRAY);
@@ -141,6 +144,7 @@ public class VerEquipo extends JDialog {
 			panel_2.add(btnmtrEliminar);
 			
 			RSButtonMetro btnmtrRegistrarLesion = new RSButtonMetro();
+			btnmtrRegistrarLesion.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/Lesion jug.png")));
 			btnmtrRegistrarLesion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(table.getSelectedRow()>=0) {
@@ -154,7 +158,7 @@ public class VerEquipo extends JDialog {
 					}
 				}
 			});
-			btnmtrRegistrarLesion.setText("Registrar Lesion");
+			btnmtrRegistrarLesion.setText("Registrar Lesion  ");
 			btnmtrRegistrarLesion.setForeground(Color.GRAY);
 			btnmtrRegistrarLesion.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrRegistrarLesion.setColorTextNormal(Color.BLACK);
@@ -166,6 +170,7 @@ public class VerEquipo extends JDialog {
 			panel_2.add(btnmtrRegistrarLesion);
 			
 			RSButtonMetro btnmtrVerJugador = new RSButtonMetro();
+			btnmtrVerJugador.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/users-icon.png")));
 			btnmtrVerJugador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(table.getSelectedRow()>=0) {
@@ -179,7 +184,7 @@ public class VerEquipo extends JDialog {
 					}
 				}
 			});
-			btnmtrVerJugador.setText("Ver jugadores");
+			btnmtrVerJugador.setText("Ver jugadores       ");
 			btnmtrVerJugador.setForeground(Color.GRAY);
 			btnmtrVerJugador.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrVerJugador.setColorTextNormal(Color.BLACK);
@@ -371,13 +376,7 @@ public class VerEquipo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cerrar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

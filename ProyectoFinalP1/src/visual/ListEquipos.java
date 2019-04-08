@@ -30,6 +30,7 @@ public class ListEquipos extends JDialog {
 	private int index;
 	
 	public ListEquipos() {
+		setTitle("Lista de equipos");
 		
 		setBounds(100, 100, 653, 366);
 		setLocationRelativeTo(null);
