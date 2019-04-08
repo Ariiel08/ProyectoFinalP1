@@ -107,7 +107,7 @@ public class VerEquipo extends JDialog {
 			});
 			btnmtrModificar.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrModificar.setBounds(2, 2, 170, 35);
-			btnmtrModificar.setText("Modificar");
+			btnmtrModificar.setText("Modificar Jugador");
 			btnmtrModificar.setForeground(Color.GRAY);
 			btnmtrModificar.setColorTextNormal(Color.BLACK);
 			btnmtrModificar.setColorPressed(Color.DARK_GRAY);
@@ -131,7 +131,7 @@ public class VerEquipo extends JDialog {
 			});
 			btnmtrEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrEliminar.setBounds(2, 42, 170, 35);
-			btnmtrEliminar.setText("Eliminar");
+			btnmtrEliminar.setText("Eliminar Jugador");
 			btnmtrEliminar.setForeground(Color.GRAY);
 			btnmtrEliminar.setColorTextNormal(Color.BLACK);
 			btnmtrEliminar.setColorPressed(Color.DARK_GRAY);
@@ -154,7 +154,7 @@ public class VerEquipo extends JDialog {
 					}
 				}
 			});
-			btnmtrRegistrarLesion.setText("Registrar lesion");
+			btnmtrRegistrarLesion.setText("Registrar Lesion");
 			btnmtrRegistrarLesion.setForeground(Color.GRAY);
 			btnmtrRegistrarLesion.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrRegistrarLesion.setColorTextNormal(Color.BLACK);
@@ -179,7 +179,7 @@ public class VerEquipo extends JDialog {
 					}
 				}
 			});
-			btnmtrVerJugador.setText("Ver jugador");
+			btnmtrVerJugador.setText("Ver jugadores");
 			btnmtrVerJugador.setForeground(Color.GRAY);
 			btnmtrVerJugador.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrVerJugador.setColorTextNormal(Color.BLACK);

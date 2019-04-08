@@ -25,6 +25,7 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 
 public class Inicio extends JFrame {
 
@@ -106,20 +107,30 @@ public class Inicio extends JFrame {
 		panel_izq = new JPanel();
 		panel_izq.setBackground(SystemColor.menu);
 		panel_izq.setLayout(null);
+		
+		JLabel labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/FondoInicio.png")));
+		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_superior, GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
+				.addComponent(panel_superior, GroupLayout.DEFAULT_SIZE, 1022, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_izq, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(851, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelLogo, GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_superior, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_izq, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_izq, GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(labelLogo, GroupLayout.PREFERRED_SIZE, 570, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		
 		panel_Nuevo = new JPanel();

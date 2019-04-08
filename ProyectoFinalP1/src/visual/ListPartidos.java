@@ -28,7 +28,8 @@ import java.awt.event.MouseEvent;
 public class ListPartidos extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;public static DefaultTableModel model;
+	private JTable table;
+	public static DefaultTableModel model;
 	public static Object[] fila;
 	private static DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	private JButton btnEliminar;
