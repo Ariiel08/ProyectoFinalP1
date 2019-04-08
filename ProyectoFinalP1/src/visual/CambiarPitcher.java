@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
@@ -18,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 
 import logic.Administracion;
 import logic.Equipo;
+import logic.Jugador;
+import logic.Pitcher;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -28,55 +31,36 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Ranking extends JDialog {
+public class CambiarPitcher extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	public static DefaultTableModel model;
 	public static Object[] fila;
-	public static ArrayList<Equipo> Ranking = new ArrayList();
 	private JButton okButton;
-	private int index;
+	private static int index = 0;
+	private static int MiEquipo;
 
-
-	public Ranking() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				Ranking.clear();
-			}
-		});
-		setTitle("Tabla de Pocisiones ");
-		setBounds(100, 100, 614, 370);
+	public CambiarPitcher(int e) {
+		MiEquipo = e;
+		setTitle("Cambio de Pitcher");
+		setBounds(100, 100, 659, 370);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Posiciones Temporada Regular", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Pitchers del Equipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(12, 25, 564, 248);
+				scrollPane.setBounds(12, 25, 611, 248);
 				panel.add(scrollPane);
 				
-				for (Equipo equipo : Administracion.getInstancia().getMisEquipos()) {
-					Ranking.add(equipo);
-				}
 				
-				Collections.sort(Ranking, new Comparator<Equipo>() {
-
-					@Override
-					public int compare(Equipo o1, Equipo o2) {
-						// TODO Auto-generated method stub
-						return Integer.valueOf(o1.getJugGanados()).compareTo(o2.getJugGanados());
-					}
-					
-				});
-				
-				String[] header = {"Nombre", "Manager", "Juegos Jugados", "Juegos Ganados", "Juegos Perdidos", "Winrate"};
+				String[] header = {"Nombre", "Numero", "Carreras", "Hits", "Jonrones", "PromCL", "Estado"};
 				model = new DefaultTableModel();
 				model.setColumnIdentifiers(header);
 				table = new JTable();
@@ -99,13 +83,18 @@ public class Ranking extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				okButton = new JButton("Perfil del Equipo");
+				okButton = new JButton("Seleccionar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						index = Administracion.getInstancia().findEquipo(Ranking.get(index).getNombre());
-						VerEquipo VE = new VerEquipo(index);
-						VE.setModal(true);
-						VE.setVisible(true);
+						String nombre = (String) table.getValueAt(index, 0);
+						index = Administracion.getInstancia().findJugador(MiEquipo, nombre);
+						if(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(index).isEstado()) {
+							dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "El Pitcher se encuentra lesionado");
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -116,7 +105,6 @@ public class Ranking extends JDialog {
 				JButton cancelButton = new JButton("Cerrar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Ranking.clear();
 						dispose();
 					}
 				});
@@ -128,35 +116,32 @@ public class Ranking extends JDialog {
 
 
 	public static void loadTable() {
-		// TODO Auto-generated method stub
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for (int i = 0; i < Ranking.size(); i++) {
-			fila[0] = Ranking.get(i).getNombre();
-			fila[1] = Ranking.get(i).getManager();
-			fila[2] = Ranking.get(i).getJugJugados();
-			fila[3] = Ranking.get(i).getJugGanados();
-			fila[4] = Ranking.get(i).getJugPerdidos();
-			
-			int victorias = Ranking.get(i).getJugGanados();
-			int derrotas = Ranking.get(i).getJugPerdidos();
-
-			if(victorias == 0 && derrotas == 0) {
-				fila[5] = "0 %";
-			}
-			else if(victorias != 0 && derrotas == 0) {
-				fila[5] = "100 %";
-			}
-			else if(victorias != 0 && derrotas != 0) {
-				float aux = (100) / (victorias + derrotas);
-				int WR = (int) (victorias * aux);
-				fila[5] = WR + " %";
-			}
-			
-			model.addRow(fila);
+		for (Jugador jug : Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores()) {
+			if(jug instanceof Pitcher) {
+				fila[0] = jug.getNombre();
+				fila[1] = jug.getNumero();
+				fila[2] = ((Pitcher) jug).getEstad().getCarrPitch();
+				fila[3] = ((Pitcher) jug).getEstad().getHitsPitch();
+				fila[4] = ((Pitcher) jug).getEstad().getJonronPitch();
+				fila[5] = ((Pitcher) jug).getEstad().getPromCL();
+				if(jug.isEstado()) {
+					fila[6] = "En Forma";
+				}
+				else {
+					fila[6] = "Lesionado";
+				}
+				
+				model.addRow(fila);
+ 			}
 		}
+		
 	}
-
+	
+	public static int retorno() {
+		return index;
+	}
 
 
 

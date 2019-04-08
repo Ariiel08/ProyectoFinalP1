@@ -130,4 +130,16 @@ public class Administracion implements Serializable{
 		
 		return admi;
 	}
+	
+	public int findPitcher(int e) {
+		int cont = 0;
+		for (Jugador i : Administracion.getInstancia().getMisEquipos().get(e).getJugadores()) {
+			if(i instanceof Pitcher) {
+				return cont;
+			}
+			cont++;
+		}
+		
+		return -1;
+	}
 }
