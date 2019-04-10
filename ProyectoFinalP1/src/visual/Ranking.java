@@ -71,7 +71,7 @@ public class Ranking extends JDialog {
 					@Override
 					public int compare(Equipo o1, Equipo o2) {
 						// TODO Auto-generated method stub
-						return Integer.valueOf(o1.getJugGanados()).compareTo(o2.getJugGanados());
+						return Integer.valueOf(o2.getJugGanados()).compareTo(o1.getJugGanados());
 					}
 					
 				});

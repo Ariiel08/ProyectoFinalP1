@@ -559,7 +559,6 @@ public class RegJugador extends JDialog {
 							estadPit = new EstadPitcher(0,H_Pitch, D_Pitch, CL, HR_Pitch, BB_Pitch, SO_Pitch, 0, 0, 0, 0);
 							pit.setEstad(estadPit);
 							//estadPit.PromCL();
-							
 							if(modi == true) {
 								Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().set(MiJugador, pit);
 								Administracion.getInstancia().Guardar(Administracion.getInstancia());
