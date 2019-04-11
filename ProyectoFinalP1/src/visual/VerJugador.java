@@ -32,6 +32,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
 
 public class VerJugador extends JDialog {
@@ -75,7 +77,7 @@ public class VerJugador extends JDialog {
 					super.paintComponent(g);
 					Graphics2D g2 = (Graphics2D) g;
 					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-					GradientPaint g3 = new GradientPaint(0, 0, getBackground().WHITE.brighter(), 0, getHeight(), getBackground().CYAN.brighter().brighter().brighter());
+					GradientPaint g3 = new GradientPaint(0, 0, getBackground().CYAN.brighter(), 0, getHeight(), getBackground().BLUE.brighter().brighter().brighter());
 					g2.setPaint(g3);
 					g2.fillRect(0, 0, getWidth(), getHeight());
 				}
@@ -257,6 +259,7 @@ public class VerJugador extends JDialog {
 	public static void loadtable() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
+		NumberFormat formatter = new DecimalFormat(".###");
 		if(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador) instanceof JugCampo) {
 			JugCampo aux = (JugCampo) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador);
 			fila[0] = aux.getEstad().getAB();
@@ -265,7 +268,14 @@ public class VerJugador extends JDialog {
 			fila[3] = aux.getEstad().getErrores();
 			fila[4] = aux.getEstad().getDobles();
 			fila[5] = aux.getEstad().getJuegosJug();
-			fila[6] = aux.getEstad().getAVG();
+			
+			if(aux.getEstad().getAB() > 0 && aux.getEstad().getH() > 0) {
+				aux.getEstad().AVG(aux.getEstad().getH(),aux.getEstad().getAB());
+				fila[6] = formatter.format(aux.getEstad().getAVG());
+			}
+			else {
+				fila[6] = 0;
+			}
 			
 			model.addRow(fila);
 		}
@@ -277,7 +287,14 @@ public class VerJugador extends JDialog {
 			fila[3] = aux.getEstad().getJonronPitch();
 			fila[4] = aux.getEstad().getPonches();
 			fila[5] = aux.getEstad().getCarrLimpias();
-			fila[6] = 0;//aux.getEstad().getPromCL();
+			
+			if(aux.getEstad().getEntradasJugadas() > 0 && aux.getEstad().getCarrLimpias() > 0) {
+				aux.getEstad().PromCL();
+				fila[6] = formatter.format(aux.getEstad().getPromCL());
+			}
+			else {
+				fila[6] = 0;
+			}
 			
 			model.addRow(fila);
 		}

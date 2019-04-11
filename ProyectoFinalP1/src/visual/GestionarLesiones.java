@@ -133,7 +133,7 @@ public class GestionarLesiones extends JDialog {
 			btnRecuperacion.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			btnRecuperacion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).isEstado()) {
+					if(Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).isEstado() == false) {
 						int check = JOptionPane.showConfirmDialog(null, "¿El jugador se recuperó?", "Aviso", JOptionPane.WARNING_MESSAGE);
 						if(check == JOptionPane.OK_OPTION) {
 							Administracion.getInstancia().getMisEquipos().get(cbxEquipos.getSelectedIndex()).getJugadores().get(index).setMiLesion(null);

@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class Inicio extends JFrame {
 
@@ -50,6 +51,7 @@ public class Inicio extends JFrame {
 		});
 	}
 	public Inicio() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio.class.getResource("/imgiconos/LogoFondo.png")));
 		
 		Administracion x = Administracion.getInstancia().Cargar();
 		
@@ -101,7 +103,7 @@ public class Inicio extends JFrame {
 		btnNuevo.setColorNormal(new Color(0, 0, 128));
 		btnNuevo.setBackground(new Color(0, 0, 128));
 		btnNuevo.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/plus-152614_960_720222.png")));
-		btnNuevo.setBounds(0, 0, 44, 52);
+		btnNuevo.setBounds(0, 0, 58, 52);
 		panel_superior.add(btnNuevo);
 		
 		panel_izq = new JPanel();
@@ -135,7 +137,7 @@ public class Inicio extends JFrame {
 		
 		panel_Nuevo = new JPanel();
 		panel_Nuevo.setBackground(SystemColor.menu);
-		panel_Nuevo.setBounds(0, 0, 170, 225);
+		panel_Nuevo.setBounds(0, 0, 170, 268);
 		panel_izq.add(panel_Nuevo);
 		panel_Nuevo.setLayout(null);
 		
@@ -215,12 +217,13 @@ public class Inicio extends JFrame {
 		lblNuevo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		panel_Gestion = new JPanel();
-		panel_Gestion.setBounds(0, 0, 170, 225);
+		panel_Gestion.setBounds(0, 0, 170, 268);
 		panel_izq.add(panel_Gestion);
 		panel_Gestion.setLayout(null);
 		panel_Gestion.setVisible(false);
 		
 		RSButtonMetro btnmtrPartidos = new RSButtonMetro();
+		btnmtrPartidos.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Gest Partidos.png")));
 		btnmtrPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -236,7 +239,7 @@ public class Inicio extends JFrame {
 		});
 		btnmtrPartidos.setBounds(0, 105, 170, 35);
 		panel_Gestion.add(btnmtrPartidos);
-		btnmtrPartidos.setText("Partidos");
+		btnmtrPartidos.setText("Partidos     ");
 		btnmtrPartidos.setForeground(Color.GRAY);
 		btnmtrPartidos.setColorTextNormal(Color.GRAY);
 		btnmtrPartidos.setColorPressed(Color.DARK_GRAY);
@@ -245,6 +248,7 @@ public class Inicio extends JFrame {
 		btnmtrPartidos.setBackground(SystemColor.menu);
 		
 		RSButtonMetro btnmtrEquipos = new RSButtonMetro();
+		btnmtrEquipos.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Gest equipos.png")));
 		btnmtrEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListEquipos le = new ListEquipos();
@@ -254,7 +258,7 @@ public class Inicio extends JFrame {
 		});
 		btnmtrEquipos.setBounds(0, 70, 170, 35);
 		panel_Gestion.add(btnmtrEquipos);
-		btnmtrEquipos.setText("Equipos");
+		btnmtrEquipos.setText("Equipos     ");
 		btnmtrEquipos.setForeground(Color.GRAY);
 		btnmtrEquipos.setColorTextNormal(Color.GRAY);
 		btnmtrEquipos.setColorPressed(Color.DARK_GRAY);
@@ -263,6 +267,7 @@ public class Inicio extends JFrame {
 		btnmtrEquipos.setBackground(SystemColor.menu);
 		
 		RSButtonMetro btnmtrJugadores = new RSButtonMetro();
+		btnmtrJugadores.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/users-icon.png")));
 		btnmtrJugadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Administracion.getInstancia().getMisEquipos().size() != 0) {
@@ -292,6 +297,7 @@ public class Inicio extends JFrame {
 		lblGestin.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		RSButtonMetro btnmtrLesiones = new RSButtonMetro();
+		btnmtrLesiones.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Gest lesiones.png")));
 		btnmtrLesiones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestionarLesiones gesl = new GestionarLesiones();
@@ -299,7 +305,7 @@ public class Inicio extends JFrame {
 				gesl.setVisible(true);
 			}
 		});
-		btnmtrLesiones.setText("Lesiones");
+		btnmtrLesiones.setText("Lesiones      ");
 		btnmtrLesiones.setForeground(Color.GRAY);
 		btnmtrLesiones.setColorTextNormal(Color.GRAY);
 		btnmtrLesiones.setColorPressed(Color.DARK_GRAY);
@@ -334,10 +340,11 @@ public class Inicio extends JFrame {
 		btnGestion.setBackground(new Color(0, 0, 128));
 		btnGestion.setColorPressed(new Color(0, 0, 128));
 		btnGestion.setColorNormal(new Color(0, 0, 128));
-		btnGestion.setBounds(46, 0, 44, 51);
+		btnGestion.setBounds(56, 1, 58, 51);
 		panel_superior.add(btnGestion);
 		
 		RSButtonMetro buttonMetro = new RSButtonMetro();
+		buttonMetro.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Ranking5.png")));
 		buttonMetro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Ranking rank = new Ranking();
@@ -345,12 +352,12 @@ public class Inicio extends JFrame {
 				rank.setVisible(true);
 			}
 		});
-		buttonMetro.setToolTipText("Gestionar");
+		buttonMetro.setToolTipText("Posiciones");
 		buttonMetro.setColorPressed(new Color(0, 0, 128));
 		buttonMetro.setColorNormal(new Color(0, 0, 128));
 		buttonMetro.setColorHover(new Color(0, 102, 204));
 		buttonMetro.setBackground(new Color(0, 0, 128));
-		buttonMetro.setBounds(89, 0, 44, 51);
+		buttonMetro.setBounds(113, 0, 58, 51);
 		panel_superior.add(buttonMetro);
 		panel.setLayout(gl_panel);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

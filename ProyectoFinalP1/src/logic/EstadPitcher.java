@@ -110,17 +110,17 @@ public class EstadPitcher implements Serializable{
 		PromCL = promCL;
 	}
 	
-	public void PromCL() {
-		float aux = 0;
-		aux = (CarrLimpias * 9) / EntradasJugadas;
-		setPromCL(aux);
-	}
-
 	public int getEntradasJugadas() {
 		return EntradasJugadas;
 	}
 
 	public void setEntradasJugadas(int entradasJugadas) {
 		EntradasJugadas = entradasJugadas;
+	}
+
+	public void PromCL() {
+		float aux = 0;
+		aux = (float) (CarrLimpias * 9) / EntradasJugadas;
+		setPromCL(aux);
 	}
 }

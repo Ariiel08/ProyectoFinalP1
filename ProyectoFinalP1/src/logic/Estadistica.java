@@ -130,9 +130,9 @@ public class Estadistica implements Serializable{
 		HR = hR;
 	}
 
-	public void AVG() {
+	public void AVG(int H, int AB) {
 		float aux = 0;
-		aux = H /AB;
+		aux = (float) H /AB;
 		setAVG(aux);
 	}
 	

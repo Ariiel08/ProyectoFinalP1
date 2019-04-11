@@ -516,7 +516,11 @@ public class RegJugador extends JDialog {
 							int edad = (cal.get(Calendar.YEAR) - fechaNacimiento.getCalendar().get(Calendar.YEAR));
 							JugCampo jc = new JugCampo(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, num, edad);
 							estad = new Estadistica(AB, D ,H ,HR , doble, triple, BB, SO, 0, 0, 0, 0, 0);
-							//estad.AVG();
+							
+							if(AB > 0 && H > 0) {
+								estad.AVG(H,AB);
+							}
+							
 							jc.setEstad(estad);
 							
 							if(modi == true) {
@@ -558,7 +562,7 @@ public class RegJugador extends JDialog {
 							Pitcher pit = new Pitcher(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, num, edad);
 							estadPit = new EstadPitcher(0,H_Pitch, D_Pitch, CL, HR_Pitch, BB_Pitch, SO_Pitch, 0, 0, 0, 0);
 							pit.setEstad(estadPit);
-							//estadPit.PromCL();
+							
 							if(modi == true) {
 								Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().set(MiJugador, pit);
 								Administracion.getInstancia().Guardar(Administracion.getInstancia());
@@ -569,7 +573,6 @@ public class RegJugador extends JDialog {
 										imgjug = new File("imgjugadores/" + Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getNombre() + ".png");
 										ImageIO.write(imagen, "png", new File(imgjug.toString()));
 									} catch (IOException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
