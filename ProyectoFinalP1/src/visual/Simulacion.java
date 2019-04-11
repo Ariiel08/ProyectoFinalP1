@@ -54,7 +54,6 @@ public class Simulacion extends JDialog {
 	private static JTextField txtIning7Local;
 	private static JTextField txtIning8Local;
 	private static JTextField txtIning9Local;
-	private JPanel panel_6;
 	private JLabel label;
 	private static JTextField txtTotalCarrerasLocal;
 	private static JTextField txtTotalHitsLocal;
@@ -62,7 +61,6 @@ public class Simulacion extends JDialog {
 	private static JTextField txtTotalCarrerasVisitante;
 	private static JTextField txtTotalHitsVisitante;
 	private static JTextField txtTotalErroresVisitante;
-	private JPanel panel_7;
 	private JLabel lblCHE;
 	private JPanel PanelCampoLocal;
 	private JPanel PanelCampoVisitante;
@@ -130,7 +128,7 @@ public class Simulacion extends JDialog {
 		Visitante = V;
 		NuevoPitcher = Administracion.getInstancia().findPitcher(Local);
 		NuevoPitcherVis = Administracion.getInstancia().findPitcher(Visitante);
-		setBounds(100, 100, 883, 715);
+		setBounds(100, 100, 883, 769);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -143,7 +141,7 @@ public class Simulacion extends JDialog {
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel_1.setBounds(12, 456, 833, 162);
+			panel_1.setBounds(12, 510, 833, 162);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
@@ -427,28 +425,8 @@ public class Simulacion extends JDialog {
 				panel_3.add(txtTotalErroresVisitante);
 			}
 			
-			panel_6 = new JPanel();
-			panel_6.setBounds(137, 418, 530, 26);
-			panel.add(panel_6);
-			panel_6.setLayout(null);
-			
-			label = new JLabel("    1          2          3        4         5          6         7         8         9");
-			label.setFont(new Font("Dialog", Font.BOLD, 18));
-			label.setBounds(12, 0, 506, 26);
-			panel_6.add(label);
-			
-			panel_7 = new JPanel();
-			panel_7.setBounds(696, 418, 137, 26);
-			panel.add(panel_7);
-			panel_7.setLayout(null);
-			
-			lblCHE = new JLabel("   C       H      E");
-			lblCHE.setFont(new Font("Dialog", Font.BOLD, 18));
-			lblCHE.setBounds(0, 0, 137, 26);
-			panel_7.add(lblCHE);
-			
 			PanelCampoLocal = new JPanel();
-			PanelCampoLocal.setBounds(12, 52, 225, 322);
+			PanelCampoLocal.setBounds(12, 100, 225, 322);
 			panel.add(PanelCampoLocal);
 			PanelCampoLocal.setLayout(new BorderLayout(0, 0));
 			PanelCampoLocal.setVisible(false);
@@ -487,7 +465,7 @@ public class Simulacion extends JDialog {
 			
 			
 			PanelCampoVisitante = new JPanel();
-			PanelCampoVisitante.setBounds(620, 52, 225, 322);
+			PanelCampoVisitante.setBounds(620, 100, 225, 322);
 			panel.add(PanelCampoVisitante);
 			PanelCampoVisitante.setLayout(new BorderLayout(0, 0));
 			
@@ -520,7 +498,7 @@ public class Simulacion extends JDialog {
 			
 			PanelVisitante = new JPanel();
 			PanelVisitante.setBorder(new TitledBorder(null, "Panel de control", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			PanelVisitante.setBounds(285, 52, 285, 112);
+			PanelVisitante.setBounds(285, 108, 285, 112);
 			panel.add(PanelVisitante);
 			PanelVisitante.setLayout(null);
 			
@@ -736,23 +714,23 @@ public class Simulacion extends JDialog {
 					}
 				}
 			});
-			btnCambioDeTurno.setBounds(359, 322, 137, 26);
+			btnCambioDeTurno.setBounds(359, 358, 137, 26);
 			panel.add(btnCambioDeTurno);
 			
 			NombreEquipoLocal = new JLabel("");
 			NombreEquipoLocal.setHorizontalAlignment(SwingConstants.CENTER);
 			NombreEquipoLocal.setFont(new Font("Dialog", Font.BOLD, 18));
-			NombreEquipoLocal.setBounds(12, 12, 225, 26);
+			NombreEquipoLocal.setBounds(12, 62, 225, 26);
 			panel.add(NombreEquipoLocal);
 			
 			NombreEquipoVisitante = new JLabel("");
 			NombreEquipoVisitante.setHorizontalAlignment(SwingConstants.CENTER);
 			NombreEquipoVisitante.setFont(new Font("Dialog", Font.BOLD, 18));
-			NombreEquipoVisitante.setBounds(620, 12, 225, 26);
+			NombreEquipoVisitante.setBounds(620, 62, 225, 26);
 			panel.add(NombreEquipoVisitante);
 			
 			PanelPitcherLocal = new JPanel();
-			PanelPitcherLocal.setBounds(12, 52, 225, 322);
+			PanelPitcherLocal.setBounds(12, 100, 225, 322);
 			panel.add(PanelPitcherLocal);
 			PanelPitcherLocal.setLayout(new BorderLayout(0, 0));
 			
@@ -768,7 +746,7 @@ public class Simulacion extends JDialog {
 			TablePitcherLocal.setModel(modelPitcherLocal);
 			
 			PanelPitcherVisitante = new JPanel();
-			PanelPitcherVisitante.setBounds(620, 52, 225, 322);
+			PanelPitcherVisitante.setBounds(620, 100, 225, 322);
 			panel.add(PanelPitcherVisitante);
 			PanelPitcherVisitante.setLayout(new BorderLayout(0, 0));
 			PanelPitcherVisitante.setVisible(false);
@@ -786,14 +764,14 @@ public class Simulacion extends JDialog {
 			FlechaIzquierda = new JLabel("\r\n");
 			FlechaIzquierda.setIcon(new ImageIcon(Simulacion.class.getResource("/imgiconos/flechaizq.png")));
 			FlechaIzquierda.setBackground(Color.WHITE);
-			FlechaIzquierda.setBounds(255, 223, 64, 64);
+			FlechaIzquierda.setBounds(255, 246, 64, 64);
 			panel.add(FlechaIzquierda);
 			FlechaIzquierda.setVisible(false);
 			
 			
 			FlechaDerecha = new JLabel("");
 			FlechaDerecha.setIcon(new ImageIcon(Simulacion.class.getResource("/imgiconos/flechaDere.png")));
-			FlechaDerecha.setBounds(538, 223, 64, 64);
+			FlechaDerecha.setBounds(538, 246, 64, 64);
 			panel.add(FlechaDerecha);
 			
 			JLabel lblNewLabel = new JLabel("Al Bate");
@@ -818,7 +796,7 @@ public class Simulacion extends JDialog {
 					LoadPitcherLocal();
 				}
 			});
-			btnCambiarPitcherLocal.setBounds(70, 380, 126, 26);
+			btnCambiarPitcherLocal.setBounds(68, 434, 126, 26);
 			panel.add(btnCambiarPitcherLocal);
 			btnCambiarPitcherLocal.setVisible(true);
 			
@@ -833,8 +811,36 @@ public class Simulacion extends JDialog {
 					LoadPitcherVisitante();
 				}
 			});
-			btnCambiarPitcherVisitante.setBounds(679, 380, 126, 26);
+			btnCambiarPitcherVisitante.setBounds(679, 434, 126, 26);
 			panel.add(btnCambiarPitcherVisitante);
+			
+			label = new JLabel("    1          2          3        4         5          6         7         8         9");
+			label.setBounds(148, 472, 506, 26);
+			panel.add(label);
+			label.setFont(new Font("Dialog", Font.BOLD, 18));
+			
+			lblCHE = new JLabel("   C       H      E");
+			lblCHE.setBounds(696, 472, 137, 26);
+			panel.add(lblCHE);
+			lblCHE.setFont(new Font("Dialog", Font.BOLD, 18));
+			
+			JLabel LabelLogoLocal = new JLabel("");
+			LabelLogoLocal.setBounds(206, 12, 87, 76);
+			panel.add(LabelLogoLocal);
+			
+			JLabel labelLogoVisitante = new JLabel("");
+			labelLogoVisitante.setBounds(567, 12, 87, 76);
+			panel.add(labelLogoVisitante);
+			
+			JLabel lblNewLabel_1 = new JLabel("Local");
+			lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 18));
+			lblNewLabel_1.setBounds(12, 12, 126, 26);
+			panel.add(lblNewLabel_1);
+			
+			JLabel lblVisitante_1 = new JLabel("Visitante");
+			lblVisitante_1.setFont(new Font("Dialog", Font.BOLD, 18));
+			lblVisitante_1.setBounds(719, 12, 126, 26);
+			panel.add(lblVisitante_1);
 			btnCambiarPitcherVisitante.setVisible(false);
 			
 		}
