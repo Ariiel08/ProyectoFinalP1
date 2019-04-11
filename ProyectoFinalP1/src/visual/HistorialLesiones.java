@@ -16,6 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -36,13 +39,14 @@ public class HistorialLesiones extends JDialog {
 	private JLabel lblEdad_1;
 	private JLabel lblPosicin;
 	private JLabel lblEquipo_1;
-
+	private static DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 	public HistorialLesiones(int i, int e) {
 		MiJugador = i;
 		MiEquipo = e;
 		setTitle("Historial de Lesiones");
-		setBounds(100, 100, 556, 350);
+		setBounds(100, 100, 690, 440);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -54,7 +58,7 @@ public class HistorialLesiones extends JDialog {
 			panel.setLayout(null);
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(12, 78, 506, 175);
+			scrollPane.setBounds(12, 78, 638, 257);
 			panel.add(scrollPane);
 			
 			String[] header = {"Tipo", "Atendido Por", "Dias de Reposo", "Fecha"};
@@ -81,12 +85,12 @@ public class HistorialLesiones extends JDialog {
 			}
 			{
 				lblPos = new JLabel("");
-				lblPos.setBounds(382, 28, 93, 16);
+				lblPos.setBounds(390, 28, 93, 16);
 				panel.add(lblPos);
 			}
 			{
 				lblEquipo = new JLabel("");
-				lblEquipo.setBounds(382, 50, 93, 16);
+				lblEquipo.setBounds(390, 50, 123, 16);
 				panel.add(lblEquipo);
 			}
 			
@@ -106,12 +110,12 @@ public class HistorialLesiones extends JDialog {
 			}
 			{
 				lblPosicin = new JLabel("Posici\u00F3n:");
-				lblPosicin.setBounds(315, 28, 55, 16);
+				lblPosicin.setBounds(323, 28, 55, 16);
 				panel.add(lblPosicin);
 			}
 			{
 				lblEquipo_1 = new JLabel("Equipo:");
-				lblEquipo_1.setBounds(315, 50, 55, 16);
+				lblEquipo_1.setBounds(323, 50, 55, 16);
 				panel.add(lblEquipo_1);
 			}
 		}
@@ -133,9 +137,11 @@ public class HistorialLesiones extends JDialog {
 	}
 
 
-	private void loadtable() {
+	public static void loadtable() {
 		
 		model.setRowCount(0);
+		Date date;
+		String fecha;
 		
 		fila = new Object[model.getColumnCount()];
 		
@@ -143,7 +149,11 @@ public class HistorialLesiones extends JDialog {
 			fila[0] = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getMisLesiones().get(i).getTipoLesion();
 			fila[1] = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getMisLesiones().get(i).getAtendNombre();
 			fila[2] = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getMisLesiones().get(i).getDiasRec() + " Dias";
-			fila[3] = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getMisLesiones().get(i).getFechaLesion();
+			
+			date = Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(MiJugador).getMisLesiones().get(i).getFechaLesion();
+			fecha = format.format(date);
+			
+			fila[3] = fecha;
 			
 			model.addRow(fila);
 		}

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import logic.Administracion;
+import logic.JugCampo;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +24,8 @@ import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
@@ -54,6 +57,10 @@ public class VerEquipo extends JDialog {
 	private JLabel lblWR;
 	private JLabel lblNombreEquipo;
 	private JLabel LogoEquipo;
+	private RSButtonMetro btnmtrModificar;
+	private RSButtonMetro btnmtrEliminar;
+	private RSButtonMetro btnmtrRegistrarLesion;
+	private RSButtonMetro btnmtrVerJugador;
 	
 	public VerEquipo(int e) {
 		setResizable(false);
@@ -87,12 +94,14 @@ public class VerEquipo extends JDialog {
 			lblNombreEquipo.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getNombre());
 			
 			JPanel panel_2 = new JPanel();
+			panel_2.setToolTipText("Seleccione un jugador del roster");
 			panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 			panel_2.setBounds(709, 70, 174, 341);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			
-			RSButtonMetro btnmtrModificar = new RSButtonMetro();
+			btnmtrModificar = new RSButtonMetro();
+			btnmtrModificar.setEnabled(false);
 			btnmtrModificar.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/Modificar Jug.png")));
 			btnmtrModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -118,7 +127,8 @@ public class VerEquipo extends JDialog {
 			btnmtrModificar.setBackground(SystemColor.menu);
 			panel_2.add(btnmtrModificar);
 			
-			RSButtonMetro btnmtrEliminar = new RSButtonMetro();
+			btnmtrEliminar = new RSButtonMetro();
+			btnmtrEliminar.setEnabled(false);
 			btnmtrEliminar.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/Eliminar jug.png")));
 			btnmtrEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -143,7 +153,8 @@ public class VerEquipo extends JDialog {
 			btnmtrEliminar.setBackground(SystemColor.menu);
 			panel_2.add(btnmtrEliminar);
 			
-			RSButtonMetro btnmtrRegistrarLesion = new RSButtonMetro();
+			btnmtrRegistrarLesion = new RSButtonMetro();
+			btnmtrRegistrarLesion.setEnabled(false);
 			btnmtrRegistrarLesion.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/Lesion jug.png")));
 			btnmtrRegistrarLesion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -169,7 +180,8 @@ public class VerEquipo extends JDialog {
 			btnmtrRegistrarLesion.setBounds(2, 82, 170, 35);
 			panel_2.add(btnmtrRegistrarLesion);
 			
-			RSButtonMetro btnmtrVerJugador = new RSButtonMetro();
+			btnmtrVerJugador = new RSButtonMetro();
+			btnmtrVerJugador.setEnabled(false);
 			btnmtrVerJugador.setIcon(new ImageIcon(VerEquipo.class.getResource("/imgiconos/users-icon.png")));
 			btnmtrVerJugador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -184,7 +196,7 @@ public class VerEquipo extends JDialog {
 					}
 				}
 			});
-			btnmtrVerJugador.setText("Ver jugadores       ");
+			btnmtrVerJugador.setText("Ver jugador           ");
 			btnmtrVerJugador.setForeground(Color.GRAY);
 			btnmtrVerJugador.setFont(new Font("Dialog", Font.BOLD, 15));
 			btnmtrVerJugador.setColorTextNormal(Color.BLACK);
@@ -274,7 +286,7 @@ public class VerEquipo extends JDialog {
 			PanelRoster.add(scrollPane, BorderLayout.CENTER);
 			
 			
-			String[] header = {"Nombre", "Pocision", "Pais de Origen", "Edad","Estado"};
+			String[] header = {"Nombre", "Pocision", "Pais de Origen", "Edad","Estado", "AVG"};
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(header);
 			table = new JTable();
@@ -282,8 +294,13 @@ public class VerEquipo extends JDialog {
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// HABILITAR BOTON 
-					index = table.getSelectedRow();
+					if(table.getSelectedRow() >= 0) {
+						btnmtrModificar.setEnabled(true);
+						btnmtrEliminar.setEnabled(true);
+						btnmtrRegistrarLesion.setEnabled(true);
+						btnmtrVerJugador.setEnabled(true);
+						index = table.getSelectedRow();
+					}
 				}
 			});
 			table.setModel(model);
@@ -341,6 +358,7 @@ public class VerEquipo extends JDialog {
 			PanelEstadistica.add(labelJuegosJugados);
 			
 			lblWR = new JLabel("");
+			lblWR.setFont(new Font("Dialog", Font.BOLD, 15));
 			lblWR.setBounds(566, 147, 85, 41);
 			PanelEstadistica.add(lblWR);
 			
@@ -366,7 +384,7 @@ public class VerEquipo extends JDialog {
 			else if(victorias != 0 && derrotas != 0) {
 				float aux = (100) / (victorias + derrotas);
 				int WR = (int) (victorias * aux);
-				lblWR.setText(String.valueOf(WR));
+				lblWR.setText(String.valueOf(WR + "%"));
 			}
 
 		}
@@ -390,6 +408,7 @@ public class VerEquipo extends JDialog {
 
 	private void loadTable() {
 		model.setRowCount(0);
+		NumberFormat formatter = new DecimalFormat(".###");
 		
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().size(); i++) {
@@ -403,6 +422,19 @@ public class VerEquipo extends JDialog {
 			}
 			else {
 				fila[4] = "Lesionado";
+			}
+			
+			if(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i) instanceof JugCampo) {
+				int H = ((JugCampo) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i)).getEstad().getH();
+				int AB = ((JugCampo) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i)).getEstad().getAB();
+				
+				if(AB > 0 && H > 0) {
+					((JugCampo) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i)).getEstad().AVG(H, AB);
+					fila[5] = formatter.format(((JugCampo) Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().get(i)).getEstad().getAVG());
+				}
+			}
+			else {
+				fila[5] = "No disponible";			
 			}
 			
 			model.addRow(fila);

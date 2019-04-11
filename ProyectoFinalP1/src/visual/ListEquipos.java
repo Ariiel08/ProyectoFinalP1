@@ -32,7 +32,7 @@ public class ListEquipos extends JDialog {
 	public ListEquipos() {
 		setTitle("Lista de equipos");
 		
-		setBounds(100, 100, 653, 366);
+		setBounds(100, 100, 884, 510);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -131,6 +131,7 @@ public class Simulacion extends JDialog {
 		NuevoPitcher = Administracion.getInstancia().findPitcher(Local);
 		NuevoPitcherVis = Administracion.getInstancia().findPitcher(Visitante);
 		setBounds(100, 100, 883, 715);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

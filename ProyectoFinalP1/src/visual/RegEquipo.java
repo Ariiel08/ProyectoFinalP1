@@ -56,7 +56,7 @@ public class RegEquipo extends JDialog {
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(66, 42, 140, 20);
+			txtNombre.setBounds(66, 42, 179, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
@@ -66,7 +66,7 @@ public class RegEquipo extends JDialog {
 			panel.add(lblProvincia);
 			
 			txtProvincia = new JTextField();
-			txtProvincia.setBounds(66, 107, 140, 20);
+			txtProvincia.setBounds(66, 107, 179, 20);
 			panel.add(txtProvincia);
 			txtProvincia.setColumns(10);
 			
@@ -76,7 +76,7 @@ public class RegEquipo extends JDialog {
 			panel.add(lblEstadio);
 			
 			txtEstadio = new JTextField();
-			txtEstadio.setBounds(66, 75, 140, 20);
+			txtEstadio.setBounds(66, 75, 179, 20);
 			panel.add(txtEstadio);
 			txtEstadio.setColumns(10);
 			
@@ -86,7 +86,7 @@ public class RegEquipo extends JDialog {
 			panel.add(lblManager);
 			
 			txtManager = new JTextField();
-			txtManager.setBounds(66, 139, 140, 20);
+			txtManager.setBounds(66, 139, 179, 20);
 			panel.add(txtManager);
 			txtManager.setColumns(10);
 			

@@ -58,8 +58,9 @@ public class RegLesion extends JDialog {
 			panel.add(lblTipoDeLesion);
 			
 			cbxTipo = new JComboBox();
+			cbxTipo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Lesion Muscular", "Lesion de Tendon", "Fractura Abierta", "Fractura Cerrada", "Contusion", "Ampolla"}));
-			cbxTipo.setBounds(92, 25, 122, 25);
+			cbxTipo.setBounds(92, 25, 141, 25);
 			panel.add(cbxTipo);
 			
 			JLabel lblAtendidoPor = new JLabel("Atendido por:");
@@ -92,6 +93,7 @@ public class RegLesion extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String tipo = cbxTipo.getSelectedItem().toString();
@@ -141,6 +143,7 @@ public class RegLesion extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

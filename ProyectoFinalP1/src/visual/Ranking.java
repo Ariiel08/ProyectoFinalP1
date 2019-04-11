@@ -27,6 +27,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Font;
 
 public class Ranking extends JDialog {
 
@@ -48,6 +49,7 @@ public class Ranking extends JDialog {
 		});
 		setTitle("Tabla de Pocisiones ");
 		setBounds(100, 100, 614, 370);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -100,6 +102,7 @@ public class Ranking extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("Perfil del Equipo");
+				okButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						index = Administracion.getInstancia().findEquipo(Ranking.get(index).getNombre());
@@ -114,6 +117,7 @@ public class Ranking extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cerrar");
+				cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Ranking.clear();

@@ -50,7 +50,7 @@ public class ListJugadores extends JDialog {
 		setResizable(false);
 		setTitle("Lista de Jugadores");
 		
-		setBounds(100, 100, 616, 406);
+		setBounds(100, 100, 909, 521);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,7 +62,7 @@ public class ListJugadores extends JDialog {
 			panel.setLayout(null);
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 50, 583, 261);
+			scrollPane.setBounds(10, 50, 871, 380);
 			panel.add(scrollPane);
 			
 			String[] header = {"Nombre", "Posición", "Pais de Origen", "Altura"};
