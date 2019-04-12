@@ -15,6 +15,7 @@ public class Partido implements Serializable{
 	private String Hora;
 	private Date Fecha;
 	private boolean Estado = true;
+	private String Ganador;
 	
 	public Partido(Equipo visitante, Equipo local, String estadio, int carrVis, int carrLoc, int errorVis, int errorLoc,
 			int hitsVis, int hitsLoc, String hora, Date fecha) {
@@ -127,5 +128,15 @@ public class Partido implements Serializable{
 	public void setEstado(boolean estado) {
 		Estado = estado;
 	}
+
+	public String getGanador() {
+		return Ganador;
+	}
+
+	public void setGanador(String ganador) {
+		Ganador = ganador;
+	}
+
+
 	
 }

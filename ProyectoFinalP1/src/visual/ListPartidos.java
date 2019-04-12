@@ -38,7 +38,7 @@ public class ListPartidos extends JDialog {
 	
 	public ListPartidos() {
 		setTitle("Lista de partidos");
-		setBounds(100, 100, 861, 518);
+		setBounds(100, 100, 955, 518);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,7 +49,7 @@ public class ListPartidos extends JDialog {
 			contentPanel.add(scrollPane, BorderLayout.CENTER);
 			{
 				
-				String[] header = {"Local", "Visitante","Estadio", "Hora", "Fecha", "Estado"};
+				String[] header = {"Local", "Visitante","Estadio", "Hora", "Fecha", "Estado", "Marcador", "Ganador"};
 				model = new DefaultTableModel();
 				model.setColumnIdentifiers(header);
 				table = new JTable();
@@ -102,7 +102,7 @@ public class ListPartidos extends JDialog {
 								indexVis = Administracion.getInstancia().findEquipo(Administracion.getInstancia().getMisPartidos().get(index).getVisitante().getNombre());
 								if(Administracion.getInstancia().getMisEquipos().get(indexLocal).getJugadores().size() >= 9 && Administracion.getInstancia().getMisEquipos().get(indexVis).getJugadores().size() >= 9) {
 									if(Administracion.getInstancia().getMisPartidos().get(index).isEstado()) {
-										Simulacion sim = new Simulacion(indexLocal, indexVis);
+										Simulacion sim = new Simulacion(indexLocal, indexVis, index);
 										sim.setModal(true);
 										sim.setVisible(true);
 										Administracion.getInstancia().getMisPartidos().get(index).setEstado(false);
@@ -161,6 +161,19 @@ public class ListPartidos extends JDialog {
 			}
 			else {
 				fila[5] = "Finalizado";
+			}
+			if(Administracion.getInstancia().getMisPartidos().get(i).isEstado() == true) {
+				fila[6] = "0 - 0";
+			}
+			else {
+				fila[6] = Administracion.getInstancia().getMisPartidos().get(i).getCarrLoc() + " - " + Administracion.getInstancia().getMisPartidos().get(i).getCarrVis();
+
+			}
+			if(Administracion.getInstancia().getMisPartidos().get(i).isEstado() == true) {
+				fila[7] = "Por Definir";
+			}
+			else {
+				fila[7] = Administracion.getInstancia().getMisPartidos().get(i).getGanador();
 			}
 			
 			model.addRow(fila);
