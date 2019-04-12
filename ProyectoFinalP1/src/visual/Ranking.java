@@ -48,7 +48,7 @@ public class Ranking extends JDialog {
 			}
 		});
 		setTitle("Tabla de Pocisiones ");
-		setBounds(100, 100, 614, 370);
+		setBounds(100, 100, 811, 477);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,7 +61,7 @@ public class Ranking extends JDialog {
 			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(12, 25, 564, 248);
+				scrollPane.setBounds(12, 25, 759, 349);
 				panel.add(scrollPane);
 				
 				for (Equipo equipo : Administracion.getInstancia().getMisEquipos()) {

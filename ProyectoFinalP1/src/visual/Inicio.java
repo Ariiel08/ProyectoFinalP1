@@ -77,6 +77,7 @@ public class Inicio extends JFrame {
 		panel_superior.setLayout(null);
 		
 		RSButtonMetro btnNuevo = new RSButtonMetro();
+		btnNuevo.setText("Nuevo");
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -102,7 +103,6 @@ public class Inicio extends JFrame {
 		btnNuevo.setColorPressed(new Color(0, 0, 128));
 		btnNuevo.setColorNormal(new Color(0, 0, 128));
 		btnNuevo.setBackground(new Color(0, 0, 128));
-		btnNuevo.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/plus-152614_960_720222.png")));
 		btnNuevo.setBounds(0, 0, 58, 52);
 		panel_superior.add(btnNuevo);
 		
@@ -316,6 +316,7 @@ public class Inicio extends JFrame {
 		panel_Gestion.add(btnmtrLesiones);
 		
 		RSButtonMetro btnGestion = new RSButtonMetro();
+		btnGestion.setText("Gestionar");
 		btnGestion.setToolTipText("Gestionar");
 		btnGestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -336,29 +337,28 @@ public class Inicio extends JFrame {
 			}
 		});
 		btnGestion.setColorHover(new Color(0, 102, 204));
-		btnGestion.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Control-Panel-icon.png")));
 		btnGestion.setBackground(new Color(0, 0, 128));
 		btnGestion.setColorPressed(new Color(0, 0, 128));
 		btnGestion.setColorNormal(new Color(0, 0, 128));
-		btnGestion.setBounds(56, 1, 58, 51);
+		btnGestion.setBounds(63, 1, 84, 51);
 		panel_superior.add(btnGestion);
 		
-		RSButtonMetro buttonMetro = new RSButtonMetro();
-		buttonMetro.setIcon(new ImageIcon(Inicio.class.getResource("/imgiconos/Ranking5.png")));
-		buttonMetro.addActionListener(new ActionListener() {
+		RSButtonMetro btnmtrRanking = new RSButtonMetro();
+		btnmtrRanking.setText("Ranking");
+		btnmtrRanking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Ranking rank = new Ranking();
 				rank.setModal(true);
 				rank.setVisible(true);
 			}
 		});
-		buttonMetro.setToolTipText("Posiciones");
-		buttonMetro.setColorPressed(new Color(0, 0, 128));
-		buttonMetro.setColorNormal(new Color(0, 0, 128));
-		buttonMetro.setColorHover(new Color(0, 102, 204));
-		buttonMetro.setBackground(new Color(0, 0, 128));
-		buttonMetro.setBounds(113, 0, 58, 51);
-		panel_superior.add(buttonMetro);
+		btnmtrRanking.setToolTipText("Posiciones");
+		btnmtrRanking.setColorPressed(new Color(0, 0, 128));
+		btnmtrRanking.setColorNormal(new Color(0, 0, 128));
+		btnmtrRanking.setColorHover(new Color(0, 102, 204));
+		btnmtrRanking.setBackground(new Color(0, 0, 128));
+		btnmtrRanking.setBounds(152, 0, 66, 51);
+		panel_superior.add(btnmtrRanking);
 		panel.setLayout(gl_panel);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

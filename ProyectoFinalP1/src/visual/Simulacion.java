@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class Simulacion extends JDialog {
 
@@ -91,6 +92,8 @@ public class Simulacion extends JDialog {
 	private JLabel FlechaDerecha;
 	private JLabel FlechaIzquierda;
 	private JLabel labelEntradaActual;
+	private JLabel LabelLogoLocal;
+	private JLabel labelLogoVisitante;
 	
 	public static int Hits = 0;
 	public static int CarrerasTotalesLocal = 0;
@@ -505,20 +508,25 @@ public class Simulacion extends JDialog {
 			btnHit = new JButton("1 Hit");
 			btnHit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ActualizarHits();
-					ActualizarHitsPitcher();
-					ActualizarAB();
-					if(EntradaAux % 2 == 0) {
-						HitsTotalLocales++;
-						LoadCampoLocal();
-						LoadPitcherVisitante();
+					if(TableCampoLocal.getSelectedRow() >= 0 || TableCampoVisitante.getSelectedRow() >= 0) {
+						ActualizarHits();
+						ActualizarHitsPitcher();
+						ActualizarAB();
+						if(EntradaAux % 2 == 0) {
+							HitsTotalLocales++;
+							LoadCampoLocal();
+							LoadPitcherVisitante();
+						}
+						else {
+							HitsTotalVisitantes++;
+							LoadCampoVisitante();
+							LoadPitcherLocal();
+						}
+						ActualizarTablero();
 					}
 					else {
-						HitsTotalVisitantes++;
-						LoadCampoVisitante();
-						LoadPitcherLocal();
+						JOptionPane.showMessageDialog(null, "No ha seleccionado un jugador.","Aviso",JOptionPane.INFORMATION_MESSAGE);
 					}
-					ActualizarTablero();
 				}
 			});
 			btnHit.setEnabled(false);
@@ -528,24 +536,29 @@ public class Simulacion extends JDialog {
 			btnCarrera = new JButton("1 Carrera");
 			btnCarrera.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Carreras++;
-					ActualizarCarreras();
-					ActualizarCarrerasPitcher();
-					ActualizarAB();
-					ActualizarCarrerasLimpias();
-					if(EntradaAux % 2 == 0) {
-						HitsTotalLocales++;
-						CarrerasTotalesLocal++;
-						LoadCampoLocal();
-						LoadPitcherVisitante();
+					if(TableCampoLocal.getSelectedRow() >= 0 || TableCampoVisitante.getSelectedRow() >= 0) {
+						Carreras++;
+						ActualizarCarreras();
+						ActualizarCarrerasPitcher();
+						ActualizarAB();
+						ActualizarCarrerasLimpias();
+						if(EntradaAux % 2 == 0) {
+							HitsTotalLocales++;
+							CarrerasTotalesLocal++;
+							LoadCampoLocal();
+							LoadPitcherVisitante();
+						}
+						else {
+							HitsTotalVisitantes++;
+							CarrerasTotalesVisitante++;
+							LoadCampoVisitante();
+							LoadPitcherLocal();
+						}
+						ActualizarTablero();
 					}
 					else {
-						HitsTotalVisitantes++;
-						CarrerasTotalesVisitante++;
-						LoadCampoVisitante();
-						LoadPitcherLocal();
+						JOptionPane.showMessageDialog(null, "No ha seleccionado un jugador.","Aviso",JOptionPane.INFORMATION_MESSAGE);
 					}
-					ActualizarTablero();
 				}
 			});
 			btnCarrera.setEnabled(false);
@@ -555,27 +568,31 @@ public class Simulacion extends JDialog {
 			btnHomerun = new JButton("1 Homerun");
 			btnHomerun.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Carreras++;
-					ActualizarJonrones();
-					ActualizarCarreras();
-					ActualizarCarrerasPitcher();
-					ActualizarJonronesPitcher();
-					ActualizarAB();
-					ActualizarCarrerasLimpias();
-					if(EntradaAux % 2 == 0) {
-						HitsTotalLocales++;
-						CarrerasTotalesLocal++;
-						LoadCampoLocal();
-						LoadPitcherVisitante();
+					if(TableCampoLocal.getSelectedRow() >= 0 || TableCampoVisitante.getSelectedRow() >=0) {
+						Carreras++;
+						ActualizarJonrones();
+						ActualizarCarreras();
+						ActualizarCarrerasPitcher();
+						ActualizarJonronesPitcher();
+						ActualizarAB();
+						ActualizarCarrerasLimpias();
+						if(EntradaAux % 2 == 0) {
+							HitsTotalLocales++;
+							CarrerasTotalesLocal++;
+							LoadCampoLocal();
+							LoadPitcherVisitante();
+						}
+						else {
+							HitsTotalVisitantes++;
+							CarrerasTotalesVisitante++;
+							LoadCampoVisitante();
+							LoadPitcherLocal();
+						}
+						ActualizarTablero();
 					}
 					else {
-						HitsTotalVisitantes++;
-						CarrerasTotalesVisitante++;
-						LoadCampoVisitante();
-						LoadPitcherLocal();
+						JOptionPane.showMessageDialog(null, "No has seleccionado un jugador.","Aviso",JOptionPane.INFORMATION_MESSAGE);
 					}
-					ActualizarTablero();
-					
 				}
 			});
 			btnHomerun.setEnabled(false);
@@ -585,19 +602,25 @@ public class Simulacion extends JDialog {
 			btnError = new JButton("1 Error");
 			btnError.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ActualizarErrores();
-					if(EntradaAux % 2 == 0) {
-						ErroresTotalLocal++;
-						LoadCampoLocal();
-						LoadPitcherVisitante();
+					if(TableCampoLocal.getSelectedRow() >= 0 || TableCampoVisitante.getSelectedRow() >=0) {
+						ActualizarErrores();
+						if(EntradaAux % 2 == 0) {
+							ErroresTotalLocal++;
+							LoadCampoLocal();
+							LoadPitcherVisitante();
+						}
+						else {
+							ErroresTotalVisitante++;
+							LoadCampoVisitante();
+							LoadPitcherLocal();
+						}
+						ActualizarTablero();
 					}
 					else {
-						ErroresTotalVisitante++;
-						LoadCampoVisitante();
-						LoadPitcherLocal();
+						JOptionPane.showMessageDialog(null, "No has seleccionado un jugador.","Aviso",JOptionPane.INFORMATION_MESSAGE);
 					}
-					ActualizarTablero();
 				}
+					
 			});
 			btnError.setEnabled(false);
 			btnError.setBounds(156, 66, 98, 26);
@@ -824,22 +847,22 @@ public class Simulacion extends JDialog {
 			panel.add(lblCHE);
 			lblCHE.setFont(new Font("Dialog", Font.BOLD, 18));
 			
-			JLabel LabelLogoLocal = new JLabel("");
+			LabelLogoLocal = new JLabel("");
 			LabelLogoLocal.setBounds(206, 12, 87, 76);
 			panel.add(LabelLogoLocal);
 			
-			JLabel labelLogoVisitante = new JLabel("");
+			labelLogoVisitante = new JLabel("");
 			labelLogoVisitante.setBounds(567, 12, 87, 76);
 			panel.add(labelLogoVisitante);
 			
 			JLabel lblNewLabel_1 = new JLabel("Local");
 			lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 18));
-			lblNewLabel_1.setBounds(12, 12, 126, 26);
+			lblNewLabel_1.setBounds(97, 12, 64, 26);
 			panel.add(lblNewLabel_1);
 			
 			JLabel lblVisitante_1 = new JLabel("Visitante");
 			lblVisitante_1.setFont(new Font("Dialog", Font.BOLD, 18));
-			lblVisitante_1.setBounds(719, 12, 126, 26);
+			lblVisitante_1.setBounds(691, 12, 87, 26);
 			panel.add(lblVisitante_1);
 			btnCambiarPitcherVisitante.setVisible(false);
 			
@@ -862,6 +885,17 @@ public class Simulacion extends JDialog {
 		LoadPitcherLocal();
 		LoadPitcherVisitante();
 		ActualizarTablero();
+		
+		File imgjug = new File("imgequipos/" + Administracion.getInstancia().getMisEquipos().get(Local).getNombre() + ".png");
+		File imgjug2 = new File("imgequipos/" + Administracion.getInstancia().getMisEquipos().get(Visitante).getNombre() + ".png");
+		
+		if(imgjug.exists()) {
+			rsscalelabel.RSScaleLabel.setScaleLabel(LabelLogoLocal, imgjug.toString());
+		}
+		
+		if(imgjug2.exists()) {
+			rsscalelabel.RSScaleLabel.setScaleLabel(labelLogoVisitante, imgjug2.toString());
+		}
 	}
 	
 	protected void ActualizarTablero() {

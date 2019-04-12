@@ -38,7 +38,7 @@ public class ListPartidos extends JDialog {
 	
 	public ListPartidos() {
 		setTitle("Lista de partidos");
-		setBounds(100, 100, 688, 391);
+		setBounds(100, 100, 861, 518);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,7 +49,7 @@ public class ListPartidos extends JDialog {
 			contentPanel.add(scrollPane, BorderLayout.CENTER);
 			{
 				
-				String[] header = {"Local", "Visitante","Estadio", "Hora", "Fecha", "Pendiente"};
+				String[] header = {"Local", "Visitante","Estadio", "Hora", "Fecha", "Estado"};
 				model = new DefaultTableModel();
 				model.setColumnIdentifiers(header);
 				table = new JTable();

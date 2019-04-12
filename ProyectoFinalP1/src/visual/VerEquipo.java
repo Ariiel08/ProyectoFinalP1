@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import logic.Administracion;
+import logic.Equipo;
 import logic.JugCampo;
 
 import javax.swing.JLabel;
@@ -24,8 +25,11 @@ import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
@@ -42,6 +46,8 @@ public class VerEquipo extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	public static DefaultTableModel model;
+	public static DefaultTableModel model2;
+	private static DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	public static Object[] fila;
 	private int index = 0;
 	private static int MiEquipo;
@@ -61,6 +67,7 @@ public class VerEquipo extends JDialog {
 	private RSButtonMetro btnmtrEliminar;
 	private RSButtonMetro btnmtrRegistrarLesion;
 	private RSButtonMetro btnmtrVerJugador;
+	private JTable tablePartidos;
 	
 	public VerEquipo(int e) {
 		setResizable(false);
@@ -367,6 +374,21 @@ public class VerEquipo extends JDialog {
 			lblCantidadLesionados.setText("0");
 			labelJuegosJugados.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugJugados()));
 			
+			JPanel PanelHistorial = new JPanel();
+			tabbedPane.addTab("Historial de partidos", null, PanelHistorial, null);
+			PanelHistorial.setLayout(new BorderLayout(0, 0));
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			PanelHistorial.add(scrollPane_1, BorderLayout.CENTER);
+			
+			String header2[] = {"Local", "Visitante","Estadio", "Hora", "Fecha", "Estado"};
+			model2 = new DefaultTableModel();
+			model2.setColumnIdentifiers(header2);
+			tablePartidos = new JTable();
+			tablePartidos.setModel(model2);
+			scrollPane_1.setViewportView(tablePartidos);
+			loadTablePartidos();
+			
 			JLabel lblControlRoster = new JLabel("Control Roster");
 			lblControlRoster.setFont(new Font("Dialog", Font.BOLD, 15));
 			lblControlRoster.setBounds(744, 41, 112, 16);
@@ -406,7 +428,7 @@ public class VerEquipo extends JDialog {
 		}
 	}
 
-	private void loadTable() {
+	public void loadTable() {
 		model.setRowCount(0);
 		NumberFormat formatter = new DecimalFormat(".###");
 		
@@ -445,5 +467,39 @@ public class VerEquipo extends JDialog {
 		if(imgjug.exists()) {
 			rsscalelabel.RSScaleLabel.setScaleLabel(LogoEquipo, imgjug.toString());
 		}
+	}
+	
+	public void loadTablePartidos() {
+		model2.setRowCount(0);
+		Date date;
+		String fecha;
+		Equipo aux = Administracion.getInstancia().getMisEquipos().get(MiEquipo);
+		
+		fila = new Object[model.getColumnCount()];
+		for (int i = 0; i < Administracion.getInstancia().getMisPartidos().size(); i++) {
+			
+			if(Administracion.getInstancia().getMisPartidos().get(i).getLocal().getNombre() == aux.getNombre() ||
+					Administracion.getInstancia().getMisPartidos().get(i).getVisitante().getNombre() == aux.getNombre()) {
+				fila[0] = Administracion.getInstancia().getMisPartidos().get(i).getLocal().getNombre();
+				fila[1] = Administracion.getInstancia().getMisPartidos().get(i).getVisitante().getNombre();
+				fila[2] =  Administracion.getInstancia().getMisPartidos().get(i).getEstadio();
+				fila[3] =  Administracion.getInstancia().getMisPartidos().get(i).getHora();
+
+				date = Administracion.getInstancia().getMisPartidos().get(i).getFecha();
+				fecha = format.format(date);
+				
+				fila[4] =  fecha;
+				if(Administracion.getInstancia().getMisPartidos().get(i).isEstado() == true) {
+					fila[5] = "Pendiente";
+				}
+				else {
+					fila[5] = "Finalizado";
+				}
+				
+				model2.addRow(fila);
+			}
+			
+		}
+		
 	}
 }
