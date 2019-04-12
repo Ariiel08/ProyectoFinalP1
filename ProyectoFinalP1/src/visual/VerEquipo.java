@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import logic.Administracion;
 import logic.Equipo;
 import logic.JugCampo;
+import logic.Jugador;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -51,14 +52,12 @@ public class VerEquipo extends JDialog {
 	public static Object[] fila;
 	private int index = 0;
 	private static int MiEquipo;
-	private JLabel lblFotoEstadio;
 	private JLabel lblNombre;
 	private JLabel lblManager;
 	private JLabel lblEstadio;
 	private JLabel lblCampeonatos;
 	private JLabel lblJuegosGanados;
 	private JLabel lblJuegosPerdidos;
-	private JLabel lblCantidadLesionados;
 	private JLabel labelJuegosJugados;
 	private JLabel lblWR;
 	private JLabel lblNombreEquipo;
@@ -68,6 +67,7 @@ public class VerEquipo extends JDialog {
 	private RSButtonMetro btnmtrRegistrarLesion;
 	private RSButtonMetro btnmtrVerJugador;
 	private JTable tablePartidos;
+	private NumberFormat formatter = new DecimalFormat(".###");
 	
 	public VerEquipo(int e) {
 		setResizable(false);
@@ -103,7 +103,7 @@ public class VerEquipo extends JDialog {
 			JPanel panel_2 = new JPanel();
 			panel_2.setToolTipText("Seleccione un jugador del roster");
 			panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel_2.setBounds(709, 70, 174, 341);
+			panel_2.setBounds(709, 70, 174, 337);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			
@@ -234,50 +234,42 @@ public class VerEquipo extends JDialog {
 			
 			JLabel labelManager = new JLabel("Manager:");
 			labelManager.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelManager.setBounds(12, 85, 113, 45);
+			labelManager.setBounds(12, 129, 113, 45);
 			panel_4.add(labelManager);
 			
 			JLabel labelEstadio = new JLabel("Estadio:");
 			labelEstadio.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelEstadio.setBounds(12, 150, 113, 45);
+			labelEstadio.setBounds(310, 129, 113, 45);
 			panel_4.add(labelEstadio);
 			
 			JLabel labelNombre = new JLabel("Nombre:");
 			labelNombre.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelNombre.setBounds(12, 20, 113, 45);
+			labelNombre.setBounds(12, 38, 113, 45);
 			panel_4.add(labelNombre);
 			
 			Label label = new Label("Campeonatos:");
 			label.setFont(new Font("Dialog", Font.BOLD, 15));
-			label.setBounds(356, 20, 111, 45);
+			label.setBounds(310, 38, 111, 45);
 			panel_4.add(label);
-			
-			Panel panel_5 = new Panel();
-			panel_5.setBounds(356, 71, 200, 124);
-			panel_4.add(panel_5);
-			panel_5.setLayout(new BorderLayout(0, 0));
-			
-			lblFotoEstadio = new JLabel("");
-			panel_5.add(lblFotoEstadio, BorderLayout.CENTER);
 			
 			lblNombre = new JLabel("");
 			lblNombre.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblNombre.setBounds(115, 20, 213, 45);
+			lblNombre.setBounds(115, 38, 213, 45);
 			panel_4.add(lblNombre);
 			
 			lblManager = new JLabel("");
 			lblManager.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblManager.setBounds(115, 85, 213, 45);
+			lblManager.setBounds(115, 129, 213, 45);
 			panel_4.add(lblManager);
 			
 			lblEstadio = new JLabel("");
 			lblEstadio.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblEstadio.setBounds(115, 150, 213, 45);
+			lblEstadio.setBounds(427, 129, 191, 45);
 			panel_4.add(lblEstadio);
 			
 			lblCampeonatos = new JLabel("");
 			lblCampeonatos.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblCampeonatos.setBounds(473, 20, 99, 45);
+			lblCampeonatos.setBounds(427, 38, 99, 45);
 			panel_4.add(lblCampeonatos);
 			
 			lblNombre.setText(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getNombre());
@@ -321,58 +313,54 @@ public class VerEquipo extends JDialog {
 			
 			JLabel lblJuegosJugados = new JLabel("Juegos Jugados:");
 			lblJuegosJugados.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblJuegosJugados.setBounds(417, 53, 184, 41);
+			lblJuegosJugados.setBounds(417, 29, 184, 41);
 			PanelEstadistica.add(lblJuegosJugados);
 			
 			JLabel labelWR = new JLabel("Winrate del Equipo:");
 			labelWR.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelWR.setBounds(417, 147, 184, 41);
+			labelWR.setBounds(417, 99, 184, 41);
 			PanelEstadistica.add(labelWR);
 			
 			JLabel labelJuegosGanados = new JLabel("Juegos Ganados:");
 			labelJuegosGanados.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelJuegosGanados.setBounds(12, 53, 184, 41);
+			labelJuegosGanados.setBounds(12, 29, 184, 41);
 			PanelEstadistica.add(labelJuegosGanados);
 			
 			JLabel labelJuegosPerdidos = new JLabel("Juegos Perdidos:");
 			labelJuegosPerdidos.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelJuegosPerdidos.setBounds(12, 147, 184, 41);
+			labelJuegosPerdidos.setBounds(12, 99, 184, 41);
 			PanelEstadistica.add(labelJuegosPerdidos);
-			
-			JLabel labelCLT = new JLabel("");
-			labelCLT.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelCLT.setBounds(12, 169, 301, 41);
-			PanelEstadistica.add(labelCLT);
 			
 			lblJuegosGanados = new JLabel("");
 			lblJuegosGanados.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblJuegosGanados.setBounds(158, 53, 96, 41);
+			lblJuegosGanados.setBounds(158, 29, 96, 41);
 			PanelEstadistica.add(lblJuegosGanados);
 			
 			lblJuegosPerdidos = new JLabel("");
 			lblJuegosPerdidos.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblJuegosPerdidos.setBounds(158, 147, 96, 41);
+			lblJuegosPerdidos.setBounds(158, 99, 96, 41);
 			PanelEstadistica.add(lblJuegosPerdidos);
-			
-			lblCantidadLesionados = new JLabel("");
-			lblCantidadLesionados.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblCantidadLesionados.setBounds(319, 169, 96, 41);
-			PanelEstadistica.add(lblCantidadLesionados);
 			
 			labelJuegosJugados = new JLabel("");
 			labelJuegosJugados.setFont(new Font("Dialog", Font.BOLD, 15));
-			labelJuegosJugados.setBounds(554, 53, 96, 41);
+			labelJuegosJugados.setBounds(554, 29, 96, 41);
 			PanelEstadistica.add(labelJuegosJugados);
 			
 			lblWR = new JLabel("");
 			lblWR.setFont(new Font("Dialog", Font.BOLD, 15));
-			lblWR.setBounds(566, 147, 85, 41);
+			lblWR.setBounds(565, 99, 85, 41);
 			PanelEstadistica.add(lblWR);
 			
 			lblJuegosGanados.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugGanados()));
 			lblJuegosPerdidos.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugPerdidos()));
-			
 			labelJuegosJugados.setText(String.valueOf(Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugJugados()));
+			
+			float avg = AVGTotal();
+			
+			JLabel lblPromTotalBateo = new JLabel("Prom. total de bateo: " + formatter.format(avg));
+			lblPromTotalBateo.setFont(new Font("Dialog", Font.BOLD, 15));
+			lblPromTotalBateo.setBounds(12, 165, 233, 41);
+			PanelEstadistica.add(lblPromTotalBateo);
 			
 			JPanel PanelHistorial = new JPanel();
 			tabbedPane.addTab("Historial de partidos", null, PanelHistorial, null);
@@ -417,6 +405,7 @@ public class VerEquipo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cerrar");
+				cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -430,7 +419,6 @@ public class VerEquipo extends JDialog {
 
 	public void loadTable() {
 		model.setRowCount(0);
-		NumberFormat formatter = new DecimalFormat(".###");
 		
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores().size(); i++) {
@@ -501,5 +489,15 @@ public class VerEquipo extends JDialog {
 			
 		}
 		
+	}
+	
+	public float AVGTotal() {
+		float suma = 0;
+		for (Jugador i : Administracion.getInstancia().getMisEquipos().get(MiEquipo).getJugadores()) {
+			if(i instanceof JugCampo) {
+				suma += ((JugCampo) i).getEstad().getAVG();
+			}
+		}
+		return suma;
 	}
 }

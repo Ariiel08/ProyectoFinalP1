@@ -515,7 +515,7 @@ public class RegJugador extends JDialog {
 						else if(index != 8){
 							int edad = (cal.get(Calendar.YEAR) - fechaNacimiento.getCalendar().get(Calendar.YEAR));
 							JugCampo jc = new JugCampo(nom, date, peso, altura, lanz, bat, pais, pos, equipo, null, num, edad);
-							estad = new Estadistica(AB, D ,H ,HR , doble, triple, BB, SO, 0, 0, 0, 0, 0);
+							estad = new Estadistica(AB, D ,H ,HR , doble, triple, BB, SO, 0, 0, 0);
 							
 							if(AB > 0 && H > 0) {
 								estad.AVG(H,AB);

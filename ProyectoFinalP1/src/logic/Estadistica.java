@@ -5,11 +5,10 @@ import java.io.Serializable;
 public class Estadistica implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private int AB,D,H,HR,Dobles,Triples,BB,Ponches,Errores,PuestosOut,DobleMatanzas,JuegosJug;
+	private int AB,D,H,HR,Dobles,Triples,BB,Ponches,Errores,JuegosJug;
 	private float AVG;
 	
-	public Estadistica(int aB, int d, int h,  int hr, int dobles, int triples, int bB, int ponches, int errores, int puestosOut,
-			int dobleMatanzas, int juegosJug, float aVG) {
+	public Estadistica(int aB, int d, int h,  int hr, int dobles, int triples, int bB, int ponches, int errores, int juegosJug, float aVG) {
 		super();
 		AB = aB;
 		D = d;
@@ -20,8 +19,6 @@ public class Estadistica implements Serializable{
 		BB = bB;
 		Ponches = ponches;
 		Errores = errores;
-		PuestosOut = puestosOut;
-		DobleMatanzas = dobleMatanzas;
 		JuegosJug = juegosJug;
 		AVG = aVG;
 	}
@@ -88,22 +85,6 @@ public class Estadistica implements Serializable{
 
 	public void setErrores(int errores) {
 		Errores = errores;
-	}
-
-	public int getPuestosOut() {
-		return PuestosOut;
-	}
-
-	public void setPuestosOut(int puestosOut) {
-		PuestosOut = puestosOut;
-	}
-
-	public int getDobleMatanzas() {
-		return DobleMatanzas;
-	}
-
-	public void setDobleMatanzas(int dobleMatanzas) {
-		DobleMatanzas = dobleMatanzas;
 	}
 
 	public int getJuegosJug() {
